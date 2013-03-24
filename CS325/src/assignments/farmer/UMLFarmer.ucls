@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.1" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <interface id="1" language="java" name="assignments.farmer.Farmer" project="CS325" 
+    file="/CS325/src/assignments/farmer/Farmer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="208" y="-112"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="2" language="java" name="assignments.farmer.FarmerFactory" project="CS325" 
+    file="/CS325/src/assignments/farmer/FarmerFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="107" x="981" y="-127"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="assignments.farmer.FarmerImpl" project="CS325" 
+    file="/CS325/src/assignments/farmer/FarmerImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="191" width="167" x="130" y="199"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="assignments.farmer.Season" project="CS325" 
+    file="/CS325/src/assignments/farmer/Season.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1003" y="345"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="assignments.farmer.farmerfactories.Amish" project="CS325" 
+    file="/CS325/src/assignments/farmer/farmerfactories/Amish.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="112" width="162" x="948" y="81"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="assignments.farmer.farmerfactories.Conventional" project="CS325" 
+    file="/CS325/src/assignments/farmer/farmerfactories/Conventional.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="162" x="1219" y="80"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="assignments.farmer.farmerfactories.Organic" project="CS325" 
+    file="/CS325/src/assignments/farmer/farmerfactories/Organic.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="108" width="162" x="713" y="90"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="assignments.farmer.interfacesoffarmingtasksstrategies.HarvestStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/interfacesoffarmingtasksstrategies/HarvestStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="79" width="244" x="1969" y="683"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="9" language="java" name="assignments.farmer.interfacesoffarmingtasksstrategies.MarketStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/interfacesoffarmingtasksstrategies/MarketStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1150" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="10" language="java" name="assignments.farmer.interfacesoffarmingtasksstrategies.PlantStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/interfacesoffarmingtasksstrategies/PlantStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="365" y="655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="11" language="java" name="assignments.farmer.interfacesoffarmingtasksstrategies.PlowStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/interfacesoffarmingtasksstrategies/PlowStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-260" y="691"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="12" language="java" name="assignments.farmer.interfacesoffarmingtasksstrategies.WeedControlStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/interfacesoffarmingtasksstrategies/WeedControlStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-941" y="667"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="13" language="java" name="assignments.farmer.interfacesoffarmingtasksstrategies.HelpStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/interfacesoffarmingtasksstrategies/HelpStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="92" width="245" x="2279" y="1231"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="14" language="java" name="assignments.farmer.variants.harveststrategies.helpstrategy.WithCornAndHay" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/harveststrategies/helpstrategy/WithCornAndHay.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="56" width="262" x="2389" y="1365"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="assignments.farmer.variants.harveststrategies.helpstrategy.WithOatsAndHay" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/harveststrategies/helpstrategy/WithOatsAndHay.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="59" width="262" x="2086" y="1364"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="assignments.farmer.variants.harveststrategies.EmployInternsAndVolunteersStrategy" 
+    project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/harveststrategies/EmployInternsAndVolunteersStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1921" y="880"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" 
+    name="assignments.farmer.variants.harveststrategies.EmployInternsAndVolunteersUPickForSquashStrategy" 
+    project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/harveststrategies/EmployInternsAndVolunteersUPickForSquashStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="75" width="330" x="1767" y="1034"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="assignments.farmer.variants.harveststrategies.HireCombineStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/harveststrategies/HireCombineStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2162" y="884"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="assignments.farmer.variants.harveststrategies.NothingToHarvestStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/harveststrategies/NothingToHarvestStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2397" y="885"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" 
+    name="assignments.farmer.variants.harveststrategies.WifeAndKidsHelpOutInTheGardenNeighborsHelpStrategy" 
+    project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/harveststrategies/WifeAndKidsHelpOutInTheGardenNeighborsHelpStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="345" x="2221" y="1058"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="assignments.farmer.variants.harveststrategies.WifeAndKidsHelpStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/harveststrategies/WifeAndKidsHelpStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2629" y="885"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="assignments.farmer.variants.weedcontrolstrategies.CultivatorStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/weedcontrolstrategies/CultivatorStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-1107" y="856"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="assignments.farmer.variants.weedcontrolstrategies.AmishSummerWeedControl" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/weedcontrolstrategies/AmishSummerWeedControl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-1387" y="849"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="assignments.farmer.variants.weedcontrolstrategies.SprayStrategy" project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/weedcontrolstrategies/SprayStrategy.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-593" y="862"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="assignments.farmer.variants.weedcontrolstrategies.EmployInternsWithHoesStrategy" 
+    project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/weedcontrolstrategies/EmployInternsWithHoesStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-848" y="860"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="assignments.farmer.variants.marketstrategies.BeansSquashTomatoes" project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/marketstrategies/BeansSquashTomatoes.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="968" y="951"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" 
+    name="assignments.farmer.variants.marketstrategies.BeansSquashTomatoesBigHarvestPartyOnFarm" project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/marketstrategies/BeansSquashTomatoesBigHarvestPartyOnFarm.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="953" y="1227"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="assignments.farmer.variants.marketstrategies.FallGarlicPeasLettuceStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/marketstrategies/FallGarlicPeasLettuceStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="906" y="799"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="assignments.farmer.variants.marketstrategies.FeedCornToElevatorStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/marketstrategies/FeedCornToElevatorStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1215" y="1106"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="assignments.farmer.variants.marketstrategies.JamsJelliesPeasLettuceStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/marketstrategies/JamsJelliesPeasLettuceStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1310" y="890"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="assignments.farmer.variants.marketstrategies.NothingToMarketStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/marketstrategies/NothingToMarketStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1636" y="742"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="assignments.farmer.variants.marketstrategies.PeasCarrotsEarlyBeansRomaTomatoes" 
+    project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/marketstrategies/PeasCarrotsEarlyBeansRomaTomatoes.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1552" y="883"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="assignments.farmer.variants.plantstrategies.AmishFallPlantStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/plantstrategies/AmishFallPlantStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="736" y="636"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="assignments.farmer.variants.plantstrategies.AmishSpringPlantStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/plantstrategies/AmishSpringPlantStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="680" y="772"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="assignments.farmer.variants.plantstrategies.AmishSummerPlantStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/plantstrategies/AmishSummerPlantStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="750" y="1381"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="assignments.farmer.variants.plantstrategies.ConventionalSummerPlantStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/plantstrategies/ConventionalSummerPlantStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="293" y="1390"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="assignments.farmer.variants.plantstrategies.OrganicFallPlantStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/plantstrategies/OrganicFallPlantStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="69" y="1382"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="assignments.farmer.variants.plantstrategies.OrganicSpringPlantStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/plantstrategies/OrganicSpringPlantStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="614" y="905"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="assignments.farmer.variants.plantstrategies.OrganicSummerPlantStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/plantstrategies/OrganicSummerPlantStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="529" y="1392"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="assignments.farmer.variants.plowstrategies.PlowCornFields" project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/plowstrategies/PlowCornFields.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-533" y="1031"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="assignments.farmer.variants.plowstrategies.PlowFallowFieldsStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/plowstrategies/PlowFallowFieldsStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-167" y="1016"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="assignments.farmer.variants.plowstrategies.PlowUnderGreenManureStrategy" 
+    project="CS325" file="/CS325/src/assignments/farmer/variants/plowstrategies/PlowUnderGreenManureStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-322" y="1145"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="assignments.farmer.variants.plowstrategies.UsingNoTill" project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/plowstrategies/UsingNoTill.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="59" y="1108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="assignments.farmer.variants.EmployInternsStrategy" project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/EmployInternsStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-40" y="1635"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="assignments.farmer.variants.NoActionStrategy" project="CS325" 
+    file="/CS325/src/assignments/farmer/variants/NoActionStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-579" y="1663"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <realization id="46">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <realization id="47">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <realization id="48">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="44"/>  
+  </generalization>  
+  <realization id="50">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <realization id="51">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="52">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <realization id="53">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="54">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="55">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="56">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="57">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="58">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="59">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="60">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="61" name="farmerFactory"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="63">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <realization id="64">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="65">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="66" name="marketStrategy"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="68">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="22"/>  
+  </generalization>  
+  <realization id="69">    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="70">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="71" name="plowStrategy"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="73">    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <generalization id="74">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <association id="75">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="76" name="season"/>      
+      <multiplicity id="77" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="78">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="79">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="80">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <realization id="81">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="82">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="83">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <association id="84">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="85" name="harvestStrategy"/>      
+      <multiplicity id="86" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="87">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <realization id="88">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <realization id="89">    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <association id="90">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="91" name="helpStrategy"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="93">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="94" name="weedControlStrategy"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="96">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="97">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <association id="98">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="99" name="season"/>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="101">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="102">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="103">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="104">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="105">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <realization id="106">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <generalization id="107">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <association id="108">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="109" name="season"/>      
+      <multiplicity id="110" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="111">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="112" name="currentSeason"/>      
+      <multiplicity id="113" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="114">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="115">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="116" name="plantStrategy"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="118">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="44"/>  
+  </generalization>  
+  <generalization id="119">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
