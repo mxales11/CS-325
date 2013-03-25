@@ -19,6 +19,7 @@ public class GameImpl implements Game {
 	private Board board;
 	private int numberOfMovesMade = 0;
 	private static final int NUMBER_OF_DICE = 2;
+	private static final int MINIMAL_NUM_OF_MOVES_TO_WIN_GAME = 6;
 	private int currentDistanceTravelled = 0;
 	private int[] diceValuesLeft;
 	private boolean changePlayer = false;
@@ -42,14 +43,18 @@ public class GameImpl implements Game {
 
 	public GameImpl(RulesFactory rulesFactory) {
 
+		setUpRules(rulesFactory);
+	}
+	
+	public void setUpRules(RulesFactory rulesFactory) {
+		
 		this.rulesFactory = rulesFactory;
 		this.rulesFactory.setGame(this);
-
+		
 		moveValidator = rulesFactory.createMoveValidator();
 		turnDeterminer = rulesFactory.createTurnDeterminer();
 		winnerDeterminer = rulesFactory.createWinnerDeterminer();
-		rollDeterminer = rulesFactory.createRollDeterminer();
-
+		rollDeterminer = rulesFactory.createRollDeterminer();	
 	}
 
 	public void setMoveValidator(MoveValidator moveValidator) {
@@ -268,7 +273,13 @@ public class GameImpl implements Game {
 	public Color winner() {
 
 		if (rulesFactory.createWinnerDeterminer().isWinner(turnNumber)) {
-			return this.getPlayerInTurn();
+			if(turnNumber == MINIMAL_NUM_OF_MOVES_TO_WIN_GAME){
+				
+				return Color.RED;
+			}
+			else {
+				return this.getPlayerInTurn();
+			}
 		}
 		return Color.NONE;
 	}

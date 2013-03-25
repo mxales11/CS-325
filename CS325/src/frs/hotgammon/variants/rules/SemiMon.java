@@ -54,6 +54,8 @@ public class SemiMon implements RulesFactory {
 		rollDeterminer.setGame(game);
 		return rollDeterminer;
 	}
+	
+	
 
 
 }

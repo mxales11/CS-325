@@ -21,7 +21,8 @@ import frs.hotgammon.mytests.SemiMonTests;
 	EpsilonMonTests.class,
 	HandiCapTests.class,
 	ZetaMonTests.class,
-	SemiMonTests.class
+	SemiMonTests.class,
+	RunTimeReconfigurationsTests.class
 	})
 
 
