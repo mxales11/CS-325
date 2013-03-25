@@ -102,10 +102,8 @@ GameImpl game;
 		game.nextTurn();
 		game.nextTurn();
 		game.nextTurn();
-		System.out.println(game.winner());
 		game.setUpRules(new BetaMon());
 		game.nextTurn();
-		System.out.println(game.winner());
 		assertTrue(game.winner() == Color.RED);
 	}
 
