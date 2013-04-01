@@ -1,7 +1,10 @@
 package minidraw.customized.tools;
 
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
+
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import minidraw.customized.helpers.Coordinates;
 import minidraw.customized.helpers.Grid;
@@ -16,10 +19,8 @@ import minidraw.standard.handlers.DragTracker;
 
 public class SnapToGridTool extends SelectionTool {
 
-	// catch exception
-
 	public SnapToGridTool(DrawingEditor editor) {
-		super(editor);
+		super(editor);	
 	}
 
 	public void mouseUp(MouseEvent e, int x, int y) {
@@ -31,64 +32,79 @@ public class SnapToGridTool extends SelectionTool {
 
 		DrawingView dV = editor.view();
 		StdViewWithBackground stdV = (StdViewWithBackground) dV;
-
-		for (Figure f : editor().drawing().selection()) {
-
-			Coordinates center = getCenterCoordinates(f.displayBox().getX(), f
-					.displayBox().getY(), f.displayBox().getWidth(), f
-					.displayBox().getHeight());
-
-			Coordinates c = getClosestGridCoordinates((int) center.getX(),
-					(int) center.getY());
-
-			int xNew = (int) (c.getX() - f.displayBox().getX());
-			int yNew = (int) (c.getY() - f.displayBox().getY());
-
-			f.moveBy(xNew, yNew);
-			
-		}
+		
+		snapFigureToGrid();
 	}
 
-	private Coordinates getCenterCoordinates(double x, double y, double width,
+	private Coordinates getFigureCenter(double x, double y, double width,
 			double height) {
 
-		return new Coordinates( x + (width / 2.0), y + (height / 2.0));
+		final double HALF = 2.0;
+		return new Coordinates(x + (width / HALF), y + (height / HALF));
 	}
 
-	/**
-	 * /** Factory method to create a Drag tracker. It is used to drag a figure.
-	 */
-	protected Tool createDragTracker(Figure f) {
-		return new DragTracker(editor(), f);
 
-	}
-
-	public void mouseMove(MouseEvent e, int x, int y) {
-
-		fChild.mouseMove(e, x, y);
-
-	}
-
-	private Coordinates getClosestGridCoordinates(int x, int y) {
+	private Coordinates getCoordinatesOfClosestGrid(int x, int y)
+			throws NullPointerException {
 
 		String name = ((JPanel) editor().view()).getComponentAt(x, y).getName();
+		
 		return gridToCoordinatesMap.get(Grid.valueOf(name));
 	}
 
 	private HashMap<Grid, Coordinates> gridToCoordinatesMap = new HashMap<Grid, Coordinates>() {
+		
+		private final Dimension VIEW_SIZE = ((JPanel) editor().view()).getPreferredSize();
+		private final int WIDTH = (int) VIEW_SIZE.getWidth();
+		private final int HEIGHT = (int) VIEW_SIZE.getHeight();
+		private final double ROWS = 3.0;
+		private final double COLUMNS = 3.0;
+		private final int DOUBLE = 2;
+		
+		private final int xOfSecondGrid =((int) ((WIDTH/ROWS)-1));
+		private final int yOfSecondGrid =((int) ((HEIGHT/COLUMNS)-1));
+		private final int xOfThirdGrid = DOUBLE * xOfSecondGrid ;
+		private final int yOfThirdGrid = DOUBLE * yOfSecondGrid;
+		
+		
 		{
-			// don't hardCode coordinates
-			put(Grid.NORTH, new Coordinates(225, 0));
-			put(Grid.SOUTH, new Coordinates(225, 450));
-			put(Grid.WEST, new Coordinates(0, 225));
-			put(Grid.EAST, new Coordinates(450, 225));
+			put(Grid.NORTH, new Coordinates(xOfSecondGrid, 0));
+			put(Grid.SOUTH, new Coordinates(xOfSecondGrid, yOfThirdGrid));
+			put(Grid.WEST, new Coordinates(0, yOfSecondGrid));
+			put(Grid.EAST, new Coordinates(xOfThirdGrid, yOfSecondGrid));
 			put(Grid.NORTHWEST, new Coordinates(0, 0));
-			put(Grid.NORTHEAST, new Coordinates(450, 0));
-			put(Grid.CENTER, new Coordinates(225, 225));
-			put(Grid.SOUTHWEST, new Coordinates(0, 450));
-			put(Grid.SOUTHEAST, new Coordinates(450, 450));
-
+			put(Grid.NORTHEAST, new Coordinates(xOfThirdGrid, 0));
+			put(Grid.CENTER, new Coordinates(xOfSecondGrid, yOfSecondGrid));
+			put(Grid.SOUTHWEST, new Coordinates(0, yOfThirdGrid));
+			put(Grid.SOUTHEAST, new Coordinates(xOfThirdGrid, yOfThirdGrid));
 		}
 	};
 
+	private void snapFigureToGrid(){
+		
+		for (Figure f : editor().drawing().selection()) {
+
+			Coordinates figureCenter = getFigureCenter(f.displayBox().getX(), f
+					.displayBox().getY(), f.displayBox().getWidth(), f
+					.displayBox().getHeight());
+
+			Coordinates gridCoordinates;
+			
+			try {
+				gridCoordinates = getCoordinatesOfClosestGrid(
+						(int) figureCenter.getX(), (int) figureCenter.getY());
+			}
+
+			catch (NullPointerException ex) {
+				System.out.println("You cannot put puzzle out of picture. Try again.");
+				return;
+			}
+			int xToMove = (int) (gridCoordinates.getX() - f.displayBox().getX());
+			int yToMove = (int) (gridCoordinates.getY() - f.displayBox().getY());
+
+			f.moveBy(xToMove, yToMove);
+
+		}
+		
+	}
 }

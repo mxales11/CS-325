@@ -44,11 +44,13 @@ public class LogoPuzzle {
 
 class PuzzleFactory implements Factory {
 
-	public DrawingView createDrawingView(DrawingEditor editor) {
-		DrawingView view = new StdViewWithBackground(editor, "au-logo");
+	private static final int ROWS = 3;
+	private static final int COLUMNS = 3;
 
-		// change that to more general
-		((StdViewWithBackground) view).setLayout(new GridLayout(3, 3));
+	public DrawingView createDrawingView(DrawingEditor editor) {
+
+		DrawingView view = new StdViewWithBackground(editor, "au-logo");
+		((StdViewWithBackground) view).setLayout(new GridLayout(ROWS, COLUMNS));
 
 		for (Grid dir : Grid.values()) {
 
