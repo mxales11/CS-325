@@ -1,9 +1,7 @@
 package minidraw.customized.tools;
 
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
-
 import javax.swing.JPanel;
 import minidraw.customized.helpers.Coordinates;
 import minidraw.customized.helpers.Grid;
@@ -18,37 +16,10 @@ import minidraw.standard.handlers.DragTracker;
 
 public class SnapToGridTool extends SelectionTool {
 
-	private int upperLeftCornerX;
-	private int upperLeftCornerY;
-	private int turnNumber = 0;
+	// catch exception
 
 	public SnapToGridTool(DrawingEditor editor) {
 		super(editor);
-
-	}
-
-	public void mouseDown(MouseEvent e, int x, int y) {
-		System.out.println("Mouse down was invoked");
-		Drawing model = editor().drawing();
-
-		model.lock();
-
-		draggedFigure = model.findFigure(e.getX(), e.getY());
-
-		if (draggedFigure != null) {
-			fChild = createDragTracker(draggedFigure);
-		} else {
-			if (!e.isShiftDown()) {
-				model.clearSelection();
-			}
-			fChild = createAreaTracker();
-		}
-		fChild.mouseDown(e, x, y);
-
-		System.out.println("Dragged figure x "
-				+ draggedFigure.displayBox().getX());
-		System.out.println("Dragged figure y  "
-				+ draggedFigure.displayBox().getY());
 	}
 
 	public void mouseUp(MouseEvent e, int x, int y) {
@@ -63,9 +34,12 @@ public class SnapToGridTool extends SelectionTool {
 
 		for (Figure f : editor().drawing().selection()) {
 
-			// change x,y to center
-			Coordinates c = getClosestGridCoordinates((int) f.displayBox().getX(),
-					(int) f.displayBox().getY());
+			Coordinates center = getCenterCoordinates(f.displayBox().getX(), f
+					.displayBox().getY(), f.displayBox().getWidth(), f
+					.displayBox().getHeight());
+
+			Coordinates c = getClosestGridCoordinates((int) center.getX(),
+					(int) center.getY());
 
 			int xNew = (int) (c.getX() - f.displayBox().getX());
 			int yNew = (int) (c.getY() - f.displayBox().getY());
@@ -75,12 +49,15 @@ public class SnapToGridTool extends SelectionTool {
 		}
 	}
 
-	private int getAppropriateGrid() {
+	private Coordinates getCenterCoordinates(double x, double y, double width,
+			double height) {
+		
+		System.out.println("x is" + x);
+		System.out.println("y is" + y);
+		System.out.println("Width is" + width);
+		System.out.println("Height is" + height);
 
-		turnNumber++;
-		System.out.println("Turn number is " + turnNumber);
-		return turnNumber;
-
+		return new Coordinates( x + (width / 2.0), y + (height / 2.0));
 	}
 
 	/**
@@ -102,7 +79,6 @@ public class SnapToGridTool extends SelectionTool {
 		String name = ((JPanel) editor().view()).getComponentAt(x, y).getName();
 		return gridToCoordinatesMap.get(Grid.valueOf(name));
 	}
-
 
 	private HashMap<Grid, Coordinates> gridToCoordinatesMap = new HashMap<Grid, Coordinates>() {
 		{
