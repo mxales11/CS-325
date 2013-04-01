@@ -45,17 +45,12 @@ public class SnapToGridTool extends SelectionTool {
 			int yNew = (int) (c.getY() - f.displayBox().getY());
 
 			f.moveBy(xNew, yNew);
-			System.out.println("Moved by" + xNew + " " + yNew);
+			
 		}
 	}
 
 	private Coordinates getCenterCoordinates(double x, double y, double width,
 			double height) {
-		
-		System.out.println("x is" + x);
-		System.out.println("y is" + y);
-		System.out.println("Width is" + width);
-		System.out.println("Height is" + height);
 
 		return new Coordinates( x + (width / 2.0), y + (height / 2.0));
 	}
