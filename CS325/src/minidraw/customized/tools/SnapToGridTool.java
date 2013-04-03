@@ -3,19 +3,12 @@ package minidraw.customized.tools;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
-
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import minidraw.customized.helpers.Coordinates;
 import minidraw.customized.helpers.Grid;
-import minidraw.framework.Drawing;
 import minidraw.framework.DrawingEditor;
-import minidraw.framework.DrawingView;
 import minidraw.framework.Figure;
-import minidraw.framework.Tool;
 import minidraw.standard.SelectionTool;
-import minidraw.standard.StdViewWithBackground;
-import minidraw.standard.handlers.DragTracker;
 
 public class SnapToGridTool extends SelectionTool {
 
@@ -24,16 +17,9 @@ public class SnapToGridTool extends SelectionTool {
 	}
 
 	public void mouseUp(MouseEvent e, int x, int y) {
-		editor().drawing().unlock();
-
-		fChild.mouseUp(e, x, y);
-		fChild = cachedNullTool;
-		draggedFigure = null;
-
-		DrawingView dV = editor.view();
-		StdViewWithBackground stdV = (StdViewWithBackground) dV;
 		
 		snapFigureToGrid();
+		super.mouseUp(e, x, y);
 	}
 
 	private Coordinates getFigureCenter(double x, double y, double width,
