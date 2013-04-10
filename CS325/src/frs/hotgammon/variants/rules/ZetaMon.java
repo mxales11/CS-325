@@ -1,10 +1,10 @@
 package frs.hotgammon.variants.rules;
 
-import frs.hotgammon.Color;
-import frs.hotgammon.Game;
-import frs.hotgammon.Location;
 import frs.hotgammon.common.GameImpl;
 import frs.hotgammon.common.GameImpl.Placement;
+import frs.hotgammon.framework.Color;
+import frs.hotgammon.framework.Game;
+import frs.hotgammon.framework.Location;
 
 public class ZetaMon extends AlphaMon {
 

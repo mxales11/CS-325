@@ -4,10 +4,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import frs.hotgammon.Color;
-import frs.hotgammon.Location;
 import frs.hotgammon.common.GameImpl;
 import frs.hotgammon.common.GameImpl.Placement;
+import frs.hotgammon.framework.Color;
+import frs.hotgammon.framework.Location;
 import frs.hotgammon.mytests.dicegenerators.DiceGenerator123456;
 import frs.hotgammon.mytests.dicegenerators.DiceGenerator124433;
 import frs.hotgammon.mytests.dicegenerators.DiceGenerator2134;

@@ -1,7 +1,7 @@
 package frs.hotgammon.variants.winnerdeterminers;
 
-import frs.hotgammon.Game;
 import frs.hotgammon.WinnerDeterminer;
+import frs.hotgammon.framework.Game;
 
 public class SixMoveWinnerDeterminer implements WinnerDeterminer {
 

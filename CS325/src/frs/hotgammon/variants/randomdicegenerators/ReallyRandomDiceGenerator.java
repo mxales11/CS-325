@@ -2,9 +2,9 @@ package frs.hotgammon.variants.randomdicegenerators;
 
 import java.util.Random;
 
-import frs.hotgammon.Game;
 import frs.hotgammon.RandomDiceGenerator;
 import frs.hotgammon.common.GameImpl;
+import frs.hotgammon.framework.Game;
 
 public class ReallyRandomDiceGenerator implements RandomDiceGenerator {
 

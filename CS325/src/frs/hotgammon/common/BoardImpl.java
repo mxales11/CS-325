@@ -2,9 +2,9 @@ package frs.hotgammon.common;
 
 import java.util.ArrayList;
 import frs.hotgammon.Board;
-import frs.hotgammon.Color;
 import frs.hotgammon.Square;
-import frs.hotgammon.Location;
+import frs.hotgammon.framework.Color;
+import frs.hotgammon.framework.Location;
 
 public class BoardImpl extends ArrayList<Square> implements Board {
 

@@ -22,6 +22,8 @@ public class SnapToGridTool extends SelectionTool {
 		super.mouseUp(e, x, y);
 	}
 
+
+	
 	private Coordinates getFigureCenter(double x, double y, double width,
 			double height) {
 

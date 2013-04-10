@@ -1,8 +1,8 @@
 package frs.hotgammon.variants.turndeterminers;
 
-import frs.hotgammon.Game;
 import frs.hotgammon.TurnDeterminer;
 import frs.hotgammon.common.GameImpl;
+import frs.hotgammon.framework.Game;
 
 public class AceyDeuceyTurnDeterminer implements TurnDeterminer {
 

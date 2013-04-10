@@ -1,5 +1,7 @@
 package frs.hotgammon;
 
+import frs.hotgammon.framework.Color;
+
 public class Square {
 	
 	public Color color;

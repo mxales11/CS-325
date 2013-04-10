@@ -1,11 +1,11 @@
 package frs.hotgammon.variants.rules;
 
-import frs.hotgammon.Game;
 import frs.hotgammon.RulesFactory;
 import frs.hotgammon.MoveValidator;
 import frs.hotgammon.RollDeterminer;
 import frs.hotgammon.TurnDeterminer;
 import frs.hotgammon.WinnerDeterminer;
+import frs.hotgammon.framework.Game;
 import frs.hotgammon.variants.movevalidators.SimpleMoveValidator;
 import frs.hotgammon.variants.rolldeterminers.PairSequenceDeterminer;
 import frs.hotgammon.variants.turndeterminers.AlternatingTurnDeterminer;

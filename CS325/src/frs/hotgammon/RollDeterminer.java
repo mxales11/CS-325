@@ -1,4 +1,5 @@
 package frs.hotgammon;
+import frs.hotgammon.framework.Game;
 import frs.hotgammon.variants.*;
 
 public interface RollDeterminer {

@@ -1,13 +1,13 @@
 package frs.hotgammon.variants.rules;
 
-import frs.hotgammon.Color;
-import frs.hotgammon.Game;
 import frs.hotgammon.RulesFactory;
 import frs.hotgammon.MoveValidator;
 import frs.hotgammon.RollDeterminer;
 import frs.hotgammon.TurnDeterminer;
 import frs.hotgammon.WinnerDeterminer;
 import frs.hotgammon.common.GameImpl;
+import frs.hotgammon.framework.Color;
+import frs.hotgammon.framework.Game;
 
 public class HandiCapMon implements RulesFactory {
 

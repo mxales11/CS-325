@@ -1,8 +1,8 @@
 package frs.hotgammon.variants.rolldeterminers;
 
-import frs.hotgammon.Game;
 import frs.hotgammon.RandomDiceGenerator;
 import frs.hotgammon.RollDeterminer;
+import frs.hotgammon.framework.Game;
 
 public class PairSequenceDeterminer implements RollDeterminer {
 

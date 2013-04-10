@@ -2,6 +2,9 @@ package frs.hotgammon;
 
 import java.util.List;
 
+import frs.hotgammon.framework.Color;
+import frs.hotgammon.framework.Location;
+
 public interface Board extends List<Square>{
 
 		public void initializeBoard();

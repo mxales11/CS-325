@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import frs.hotgammon.Location;
 import frs.hotgammon.common.GameImpl;
+import frs.hotgammon.framework.Location;
 import frs.hotgammon.variants.rules.AlphaMon;
 import frs.hotgammon.variants.rules.BetaMon;
 import frs.hotgammon.variants.rules.HandiCapMon;

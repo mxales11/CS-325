@@ -1,5 +1,7 @@
 package frs.hotgammon;
 
+import frs.hotgammon.framework.Game;
+
 
 public interface WinnerDeterminer {
 

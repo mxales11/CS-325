@@ -3,8 +3,6 @@ package frs.hotgammon.mytests;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import frs.hotgammon.Color;
-import frs.hotgammon.Location;
 import frs.hotgammon.common.GameImpl;
 import frs.hotgammon.variants.movevalidators.CompleteMoveValidator;
 import frs.hotgammon.variants.rolldeterminers.PairSequenceDeterminer;
@@ -12,6 +10,8 @@ import frs.hotgammon.variants.rules.BetaMon;
 import frs.hotgammon.variants.turndeterminers.AlternatingTurnDeterminer;
 import frs.hotgammon.variants.winnerdeterminers.SixMoveWinnerDeterminer;
 import frs.hotgammon.common.GameImpl.Placement;
+import frs.hotgammon.framework.Color;
+import frs.hotgammon.framework.Location;
 
 
 public class BetaMonTests {

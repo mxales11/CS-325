@@ -1,7 +1,7 @@
 package frs.hotgammon.mytests.dicegenerators;
 
-import frs.hotgammon.Game;
 import frs.hotgammon.RandomDiceGenerator;
+import frs.hotgammon.framework.Game;
 
 public class DiceGenerator2134 implements RandomDiceGenerator {
 

@@ -3,14 +3,15 @@ package frs.hotgammon.common;
 import java.util.ArrayList;
 import java.util.Arrays;
 import frs.hotgammon.Board;
-import frs.hotgammon.Color;
-import frs.hotgammon.Game;
 import frs.hotgammon.RulesFactory;
-import frs.hotgammon.Location;
 import frs.hotgammon.MoveValidator;
 import frs.hotgammon.RollDeterminer;
 import frs.hotgammon.TurnDeterminer;
 import frs.hotgammon.WinnerDeterminer;
+import frs.hotgammon.framework.Color;
+import frs.hotgammon.framework.Game;
+import frs.hotgammon.framework.GameObserver;
+import frs.hotgammon.framework.Location;
 
 public class GameImpl implements Game {
 
@@ -333,6 +334,12 @@ public class GameImpl implements Game {
 
 	public boolean getMovesDoubled() {
 		return movesDoubled;
+	}
+
+	@Override
+	public void addObserver(GameObserver observer) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
