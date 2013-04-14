@@ -19,7 +19,7 @@ public class DiceRollState implements GameState {
 
 	@Override
 	public void nextTurn() {
-		//copy from game
+		//move code from game
 		// TODO Auto-generated method stub
 		
 	}

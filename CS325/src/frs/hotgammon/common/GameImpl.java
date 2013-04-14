@@ -34,10 +34,7 @@ public class GameImpl implements Game {
 	private WinnerDeterminer winnerDeterminer;
 
 	private RulesFactory rulesFactory;
-
-	// narazie zrobie ¿e jedyny state to jest moveCheckerState ZMIEÑ TO
-	//private GameState gameState = new MoveCheckerState();
-
+	
 	private ArrayList<GameObserver> gameObserversList = new ArrayList<GameObserver>();
 
 	public int getNumberOfMovesMade() {
@@ -358,7 +355,8 @@ public class GameImpl implements Game {
 
 	@Override
 	public GameState getGameState() {
-		return gameState;
+		return currentState;
+		
 	}
 
 }

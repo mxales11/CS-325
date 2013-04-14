@@ -1,5 +1,6 @@
 package frs.hotgammon.view.tools;
 
+import frs.hotgammon.view.*;
 import java.awt.event.MouseEvent;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.Location;
@@ -13,17 +14,28 @@ import minidraw.standard.SelectionTool;
 public class CheckerMoveTool extends AbstractTool {
 
 	private Game game;
+	private Location lastFromLocation;
 
 	public CheckerMoveTool(DrawingEditor editor, Game game) {
 		super(editor);
 		this.game = game;
 		
 	}
-
+	
 	public void mouseUp(MouseEvent e, int x, int y) {
-				
-				game.move(Location.B1, Location.B2);
-				System.out.println("You moved from location B1 to B2");
+		
+		super.mouseUp(e, x, y);
+		Location to = Convert.xy2Location(x, y); 
+		game.move(lastFromLocation, to);
+		lastFromLocation = null;
+	}
+
+	public void mouseDown(MouseEvent e, int x, int y) {
+		
+		Location from = Convert.xy2Location(x, y);
+		lastFromLocation = from;
+		//how do i get back if it returns false
+		
 	}
 
 	public String toString() {

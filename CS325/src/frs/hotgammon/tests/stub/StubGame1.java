@@ -77,15 +77,20 @@ public class StubGame1 implements Game {
 	public boolean move(Location from, Location to) {
 		
 		
-		
-		if (to != Location.B3 && to != Location.R3) {
+		if (to != Location.B3 && to != Location.R3 && to != null) {
 			System.out.println("GAME: moving from " + from + " to " + to);
 			if (from == loneRiderHere1) {
 				loneRiderHere1 = to;
 			} else if (from == loneRiderHere2) {
 				loneRiderHere2 = to;
 			}
-		} else {
+		} 
+		else if (to == null) {
+			
+			System.out.println("You cannot move to empty location");
+			return false;
+		}
+		else {
 			System.out
 					.println("GAME: Moving to B3/R3 is illegal (testing purposes)");
 			return false;

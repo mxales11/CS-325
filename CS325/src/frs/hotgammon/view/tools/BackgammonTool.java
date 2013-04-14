@@ -1,9 +1,15 @@
 package frs.hotgammon.view.tools;
 
 import java.awt.event.MouseEvent;
+
+import javax.tools.JavaFileManager.Location;
+
+
+import frs.hotgammon.view.*;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.states.DiceRollState;
 import frs.hotgammon.states.MoveCheckerState;
+import frs.hotgammon.view.Convert;
 import frs.hotgammon.view.figures.CheckerFigure;
 import minidraw.framework.DrawingEditor;
 import minidraw.framework.Figure;
@@ -19,7 +25,8 @@ public class BackgammonTool extends SelectionTool {
 	private Tool diceRollTool;
 	private Tool currentTool;
 	private Game game;
-
+	
+	
 	public BackgammonTool(DrawingEditor editor, Game game) {
 		super(editor);
 
@@ -39,21 +46,31 @@ public class BackgammonTool extends SelectionTool {
 		}
 	}
 
+	
+	
 	public void mouseUp(MouseEvent e, int x, int y) {
+	
+		currentTool.mouseUp(e, x, y);
+	
+	}
+	
+	
+	public void mouseDown(MouseEvent e, int x, int y) {
 
 		currentTool = getCurrentTool();
 		
 		System.out.println("CURRENT TOOL IS" + currentTool);
 		
-		currentTool.mouseUp(e, x, y);
+		currentTool.mouseDown(e, x, y);
 		
 		if (currentTool instanceof NullTool) {
 			printWarning();
 		}
-		super.mouseUp(e, y, y);
-
+		super.mouseDown(e, x, y);
+		
 	}
-
+	
+	
 	private void printWarning() {
 		
 		System.out
