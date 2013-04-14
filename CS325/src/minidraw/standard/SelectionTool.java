@@ -63,14 +63,17 @@ public  class SelectionTool extends AbstractTool implements Tool {
    */
   public void mouseDown(MouseEvent e, int x, int y)
   {
+	  
+	System.out.println("Mouse down was invoked");
     Drawing model = editor().drawing();
     
     model.lock();
 
     draggedFigure = model.findFigure(e.getX(), e.getY());
-
+   
     if ( draggedFigure != null ) {
       fChild = createDragTracker( draggedFigure );
+     
     } else {
       if ( ! e.isShiftDown() ) {
         model.clearSelection();
@@ -81,6 +84,7 @@ public  class SelectionTool extends AbstractTool implements Tool {
   }
       
   public void mouseDrag(MouseEvent e, int x, int y) {
+	
     fChild.mouseDrag(e, x, y);
   }
 
@@ -89,6 +93,7 @@ public  class SelectionTool extends AbstractTool implements Tool {
   }
 
   public void mouseUp(MouseEvent e, int x, int y) {
+	  
     editor().drawing().unlock();
 
     fChild.mouseUp(e, x, y);

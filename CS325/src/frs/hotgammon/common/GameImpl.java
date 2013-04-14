@@ -12,6 +12,8 @@ import frs.hotgammon.framework.Color;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.GameObserver;
 import frs.hotgammon.framework.Location;
+import frs.hotgammon.states.GameState;
+import frs.hotgammon.states.MoveCheckerState;
 
 public class GameImpl implements Game {
 
@@ -25,13 +27,18 @@ public class GameImpl implements Game {
 	private int[] diceValuesLeft;
 	private boolean changePlayer = false;
 	private boolean movesDoubled = false;
-
+	
 	private MoveValidator moveValidator;
 	private TurnDeterminer turnDeterminer;
 	private RollDeterminer rollDeterminer;
 	private WinnerDeterminer winnerDeterminer;
 
 	private RulesFactory rulesFactory;
+
+	// narazie zrobie ¿e jedyny state to jest moveCheckerState ZMIEÑ TO
+	//private GameState gameState = new MoveCheckerState();
+
+	private ArrayList<GameObserver> gameObserversList = new ArrayList<GameObserver>();
 
 	public int getNumberOfMovesMade() {
 
@@ -46,16 +53,16 @@ public class GameImpl implements Game {
 
 		setUpRules(rulesFactory);
 	}
-	
+
 	public void setUpRules(RulesFactory rulesFactory) {
-		
+
 		this.rulesFactory = rulesFactory;
 		this.rulesFactory.setGame(this);
-		
+
 		moveValidator = rulesFactory.createMoveValidator();
 		turnDeterminer = rulesFactory.createTurnDeterminer();
 		winnerDeterminer = rulesFactory.createWinnerDeterminer();
-		rollDeterminer = rulesFactory.createRollDeterminer();	
+		rollDeterminer = rulesFactory.createRollDeterminer();
 	}
 
 	public void setMoveValidator(MoveValidator moveValidator) {
@@ -122,6 +129,11 @@ public class GameImpl implements Game {
 
 		rulesFactory.createTurnDeterminer().nextTurn(changePlayer);
 		turnNumber++;
+
+		for (int i = 0; i < gameObserversList.size(); i++) {
+			gameObserversList.get(i).diceRolled(diceThrown());
+		}
+
 	}
 
 	public Color getStartingPlayer() {
@@ -148,7 +160,6 @@ public class GameImpl implements Game {
 		if (rulesFactory.createMoveValidator().isValid(from, to)) {
 			currentDistanceTravelled = Math.abs(Location.distance(from, to));
 
-		
 			if (numberOfMovesMade == 3) {
 				movesDoubled = false;
 			}
@@ -160,13 +171,17 @@ public class GameImpl implements Game {
 			board.move(from, to);
 			updateDiceValuesLeft();
 			numberOfMovesMade++;
-			
-			
+
 			if (numberOfMovesMade == 2 && movesDoubled) {
 				diceValuesLeft = new int[2];
 				diceValuesLeft[0] = diceThrown()[0];
 				diceValuesLeft[1] = diceThrown()[1];
 			}
+
+			for (int i = 0; i < gameObserversList.size(); i++) {
+				gameObserversList.get(i).checkerMove(from, to);
+			}
+
 			return true;
 		}
 		return false;
@@ -263,8 +278,7 @@ public class GameImpl implements Game {
 
 	public int[] diceValuesLeft() {
 
-		if (diceValuesLeft != null
-				&& diceValuesLeft.length == NUMBER_OF_DICE) {
+		if (diceValuesLeft != null && diceValuesLeft.length == NUMBER_OF_DICE) {
 			Arrays.sort(diceValuesLeft);
 			reverseArrayWith2Elements(diceValuesLeft);
 		}
@@ -274,11 +288,10 @@ public class GameImpl implements Game {
 	public Color winner() {
 
 		if (rulesFactory.createWinnerDeterminer().isWinner(turnNumber)) {
-			if(turnNumber == MINIMAL_NUM_OF_MOVES_TO_WIN_GAME){
-				
+			if (turnNumber == MINIMAL_NUM_OF_MOVES_TO_WIN_GAME) {
+
 				return Color.RED;
-			}
-			else {
+			} else {
 				return this.getPlayerInTurn();
 			}
 		}
@@ -338,8 +351,14 @@ public class GameImpl implements Game {
 
 	@Override
 	public void addObserver(GameObserver observer) {
-		// TODO Auto-generated method stub
-		
+
+		gameObserversList.add(observer);
+
+	}
+
+	@Override
+	public GameState getGameState() {
+		return gameState;
 	}
 
 }

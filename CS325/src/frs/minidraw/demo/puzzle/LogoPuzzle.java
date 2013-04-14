@@ -26,6 +26,7 @@ public class LogoPuzzle {
 				"Put the pieces into place", new PuzzleFactory());
 		editor.open();
 		editor.setTool(new SnapToGridTool(editor));
+		
 
 		Drawing drawing = editor.drawing();
 
