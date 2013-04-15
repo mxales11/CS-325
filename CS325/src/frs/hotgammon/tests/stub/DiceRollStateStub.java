@@ -25,10 +25,8 @@ public class DiceRollStateStub implements GameState {
 
 	@Override
 	public void nextTurn() {
-		// move code from game
-
+		
 		game = ((StubGame1) game);
-
 		game.turn++;
 		((StubGame1) game).maxNumberOfMoves();
 		((StubGame1) game).tictac = !((StubGame1) game).tictac;
@@ -38,8 +36,6 @@ public class DiceRollStateStub implements GameState {
 		for (int i = 0; i < observers.size(); i++) {
 			observers.get(i).diceRolled(((StubGame1) game).diceThrown());
 		}
-
-		//game.setState(new MoveCheckerState(game));
 		game.setState(new MoveCheckerStateStub(game));
 		
 

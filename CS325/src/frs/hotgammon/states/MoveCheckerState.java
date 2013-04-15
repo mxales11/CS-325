@@ -1,7 +1,6 @@
 package frs.hotgammon.states;
 
 import java.util.ArrayList;
-
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.GameObserver;
 import frs.hotgammon.framework.Location;
@@ -20,8 +19,6 @@ public class MoveCheckerState implements GameState {
 
 	@Override
 	public boolean move(Location from, Location to) {
-
-		// copied from game
 
 		if (game.diceThrownEqual()) {
 			game.movesDoubled = true;

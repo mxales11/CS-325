@@ -8,10 +8,8 @@ public class CheckerFigure extends ImageFigure {
 	private Color color = Color.NONE;
 
 	public CheckerFigure(Color color, Point point) {
-		
 		super(color.toString().toLowerCase() + "checker", point);
 		this.color = color;
-		System.out.println("Checker was created");
 	}
 	
 	public Color getColor() {

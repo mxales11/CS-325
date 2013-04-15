@@ -20,8 +20,6 @@ public class MoveCheckerStateStub implements GameState {
 	@Override
 	public boolean move(Location from, Location to) {
 
-		// copied from game
-
 		if (to != Location.B3 && to != Location.R3 && to != null) {
 			System.out.println("GAME: moving from " + from + " to " + to);
 			if (from == game.loneRiderHere1) {
@@ -33,7 +31,6 @@ public class MoveCheckerStateStub implements GameState {
 
 		else if (to == null) {
 
-			// it never equals null cause Convert returns the closest location
 			System.out.println("You cannot move to empty location");
 			return false;
 		}
@@ -52,7 +49,6 @@ public class MoveCheckerStateStub implements GameState {
 		if (noMovesLeft()) {
 
 			System.out.println("NUMBER OF MOVES LEFT IS " + game.movesLeft);
-			// zobacz czy dac to wyzej
 			game.setState(new DiceRollStateStub(game));
 
 		}

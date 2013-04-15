@@ -1,6 +1,8 @@
 package frs.hotgammon.view.drawings;
 
+import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import minidraw.customized.helpers.Coordinates;
@@ -8,6 +10,7 @@ import minidraw.framework.DrawingEditor;
 import minidraw.framework.Figure;
 import minidraw.framework.FigureChangeEvent;
 import minidraw.framework.Figure.*;
+import minidraw.standard.ImageFigure;
 import minidraw.standard.StandardDrawing;
 import frs.hotgammon.framework.Color;
 import frs.hotgammon.framework.Game;
@@ -20,17 +23,15 @@ import frs.hotgammon.view.tools.HotgammonTool;
 import frs.hotgammon.view.*;
 
 public class HotgammonDrawing extends StandardDrawing implements GameObserver {
-	
+
 	private ArrayList<CheckerFigure> checkerList = new ArrayList<CheckerFigure>();
 	private ArrayList<DieFigure> diceList = new ArrayList<DieFigure>();
-	//no sates here
+
 	public HotgammonDrawing() {
-
 		initializeCheckers();
-
 	}
 
-	//read it from model
+	// read it from model instead of initializing here
 	private void initializeCheckers() {
 
 		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
@@ -94,13 +95,13 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 				Location.B12, 3)));
 		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
 				Location.B12, 4)));
-		
+
 		System.out.println("Checker list is " + checkerList.size());
 
 	}
 
 	public Figure add(Figure figure) {
-	
+
 		if (figure instanceof CheckerFigure) {
 			checkerList.add((CheckerFigure) figure);
 		}
@@ -109,17 +110,14 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 			diceList.add((DieFigure) figure);
 		}
 
-		System.out.println("ADD WAS INVOKED");
-		// repaint the image
 		return super.add(figure);
 
 	}
 
 	public Figure remove(Figure figure) {
 
-		// remove not add
-
 		if (figure instanceof CheckerFigure) {
+
 			checkerList.remove((CheckerFigure) figure);
 		}
 
@@ -128,48 +126,66 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 		}
 
 		System.out.println("REMOVE WAS INVOKED");
-		// repaint the image
-		return super.add(figure);
+		return super.remove(figure);
 
 	}
 
-
 	@Override
 	public void checkerMove(Location from, Location to) {
-		
-		Figure figure =  new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.R1, 1));
-		
-		System.out.println("Size before removing " + checkerList.size());
-		System.out.println("Was removed " + checkerList.remove(0));
-		System.out.println("Size after removing " + checkerList.size());
-		//checkerList.add(to);
-		
-		// remove one Figure from Location, add another Figure
-		// repaint drawing
 
 		System.out.println("CHECKER MOVE METHOD WAS INVOKED");
-		System.out.println("CHECKER SHOULD BE REMOVED FROM R1");
 
-		 figure.displayBox();
-		super.figureChanged(new FigureChangeEvent(figure));
-		this.changed();
+		Point point1 = Convert.locationAndCount2xy(to, 0);
+		Point point2 = Convert.locationAndCount2xy(to, 1);
+		Point point3 = Convert.locationAndCount2xy(to, 2);
 		
+		Figure foundFigure = (findFigure(point1.x, point1.y) !=null) ? (findFigure(point1.x, point1.y)):
+			(findFigure(point2.x, point2.y)!=null ? (findFigure(point3.x, point3.y)) : findFigure(point2.x, point2.y));
+
+		if (foundFigure != null) {
+			System.out.println("Figure moved is" + foundFigure);
+
+			Color color = ((CheckerFigure) foundFigure).getColor();
+			System.out.println(color);
+			this.remove(foundFigure);
+			this.add(new CheckerFigure(color, Convert
+					.locationAndCount2xy(to, 0)));
+			foundFigure.displayBox();
+			this.figureChanged(new FigureChangeEvent(foundFigure));
+			this.changed();
+		} else {
+
+			System.out.println("figure is null");
+		}
+
 	}
 
 	@Override
 	public void diceRolled(int[] values) {
 
-		// remove one die from list, add other die to list
-		// repaint drawing
+		System.out.println("Dice values lenght is 2");
+		if (values != null && values.length == 2) {
 
-		// add die
-		// this.displayBox(); //drawing box
-		this.changed(); // it invoked revalidate somewhere
+			System.out.println("DICE ROLLED METHOD WAS INVOKED");
 
-		// jezeli tu doszlo to znaczy ze jest legal
+			for (int i = 0; i < values.length; i++) {
 
-		System.out.println("DICE ROLLED METHOD WAS INVOKED");
+				this.remove(diceList.get(0));
+			}
+			DieFigure redDie = new DieFigure("die" + String.valueOf(values[0]),
+					new Point(216, 202));
+
+			DieFigure blackDie = new DieFigure("die"
+					+ String.valueOf(values[1]), new Point(306, 202));
+
+			this.add(redDie);
+			this.add(blackDie);
+
+			this.figureChanged(new FigureChangeEvent(redDie));
+			this.figureChanged(new FigureChangeEvent(blackDie));
+			this.changed();
+			System.out.println("DICE ROLLED METHOD WAS INVOKED");
+		}
 
 	}
 

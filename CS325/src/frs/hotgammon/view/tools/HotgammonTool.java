@@ -43,8 +43,6 @@ public class HotgammonTool extends SelectionTool {
 		for (Figure f : editor().drawing().selection()) {
 
 			if (toolMovesItsFigure(f, currentTool) && currentTool !=null && !(currentTool instanceof NullTool)) {
-
-				System.out.println("Figure is" + f);
 				currentTool.mouseUp(e, x, y);
 				
 			}

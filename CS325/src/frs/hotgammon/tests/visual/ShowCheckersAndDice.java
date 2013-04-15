@@ -35,8 +35,6 @@ public class ShowCheckersAndDice {
 
 	public static void main(String[] args) {
 
-		// Game game = new StubGame1();
-
 		Game game = new GameImpl(new AlphaMon());
 		game.newGame();
 
@@ -52,17 +50,6 @@ public class ShowCheckersAndDice {
 		model.add(redDie);
 		model.add(blackDie);
 
-		
-		// the beggining display should be read from model not just displayed
-		// like this
-		/**
-		Figure bc = new CheckerFigure(Color.BLACK, new Point(507, 390));
-		model.add(bc);
-		Figure rc = new CheckerFigure(Color.RED, new Point(507,390));
-    	editor.drawing().add(rc);
-		**/
-		
-		// editor.setTool( new SelectionTool(editor) );
 		editor.setTool(new HotgammonTool(editor, game));
 
 	}
@@ -75,7 +62,7 @@ class HotGammonFactory implements Factory {
 	}
 
 	public Drawing createDrawing(DrawingEditor editor) {
-		// return new StandardDrawing();
+
 		return new HotgammonDrawing();
 
 	}

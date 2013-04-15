@@ -170,8 +170,7 @@ public class StubGame1 implements Game {
 	}
 	
 	
-	
-	//those methods don't do anything yet
+	//those methods don't do anything
 	@Override
 	public int getNumberOfMovesMade() {
 		// TODO Auto-generated method stub

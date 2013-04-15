@@ -25,8 +25,7 @@ public class DiceRollState implements GameState {
 
 	@Override
 	public void nextTurn() {
-		// move code from game
-
+		
 		game.numberOfMovesMade = 0;
 		game.getRollDeterminer().rollDice(game.turnNumber);
 		game.diceValuesLeft = game.diceThrown().clone();
@@ -37,12 +36,10 @@ public class DiceRollState implements GameState {
 		}
 
 		game.getRulesFactory().createTurnDeterminer().nextTurn(game.changePlayer);
-
 		game.turnNumber++;
 
 		for (int i = 0; i < game.getGameObserversList().size(); i++) {
 			game.getGameObserversList().get(i).diceRolled(game.diceThrown());
-
 		}
 		game.setState(new MoveCheckerState(game));
 
