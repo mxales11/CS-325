@@ -70,7 +70,7 @@ public class ShowRectangle {
     JMenuItem menuItem;
     
     menuBar = new JMenuBar();
-    menu = new JMenu("BackgammonTool");
+    menu = new JMenu("HotgammonTool");
     menuBar.add(menu);
 
     menuItem = new JMenuItem("Rectangle");

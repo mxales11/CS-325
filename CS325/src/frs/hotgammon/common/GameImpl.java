@@ -126,22 +126,8 @@ public class GameImpl implements Game {
 
 	public void nextTurn() {
 		
-		
 		currentState.nextTurn();
-		
-		/**
-		 * numberOfMovesMade = 0; rollDeterminer.rollDice(turnNumber);
-		 * diceValuesLeft = diceThrown().clone();
-		 * 
-		 * if (turnNumber == 0) { playerInTurn = getStartingPlayer(); }
-		 * 
-		 * rulesFactory.createTurnDeterminer().nextTurn(changePlayer);
-		 * turnNumber++;
-		 * 
-		 * for (int i = 0; i < gameObserversList.size(); i++) {
-		 * gameObserversList.get(i).diceRolled(diceThrown()); }
-		 **/
-
+	
 	}
 
 	public Color getStartingPlayer() {
@@ -166,40 +152,7 @@ public class GameImpl implements Game {
 		
 		return currentState.move(from, to);
 
-		/**
-		if (diceThrownEqual()) {
-			movesDoubled = true;
-		}
-
-		if (rulesFactory.createMoveValidator().isValid(from, to)) {
-			currentDistanceTravelled = Math.abs(Location.distance(from, to));
-
-			if (numberOfMovesMade == 3) {
-				movesDoubled = false;
-			}
-
-			if (getCount(to) > 0 && getColor(to) != playerInTurn) {
-				this.sendToTheBar(from, to);
-			}
-
-			board.move(from, to);
-			updateDiceValuesLeft();
-			numberOfMovesMade++;
-
-			if (numberOfMovesMade == 2 && movesDoubled) {
-				diceValuesLeft = new int[2];
-				diceValuesLeft[0] = diceThrown()[0];
-				diceValuesLeft[1] = diceThrown()[1];
-			}
-
-			for (int i = 0; i < gameObserversList.size(); i++) {
-				gameObserversList.get(i).checkerMove(from, to);
-			}
-
-			return true;
-		}
-		return false;
-		**/
+	
 	}
 
 	public Color getPlayerInTurn() {

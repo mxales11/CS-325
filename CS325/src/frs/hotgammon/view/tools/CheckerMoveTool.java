@@ -14,9 +14,9 @@ import minidraw.standard.AbstractTool;
 public class CheckerMoveTool extends AbstractTool {
 
 	private Game game;
-	private Location lastFromLocation;
-	private Point pointLastMovedFrom;
-	private Point pointLastMovedTo;
+	private Location lastFromLocation = Location.R1;
+	private Point pointFrom = new Point(0,0);
+	private Point pointTo = new Point(0, 0);
 
 	public CheckerMoveTool(DrawingEditor editor, Game game) {
 		super(editor);
@@ -27,46 +27,53 @@ public class CheckerMoveTool extends AbstractTool {
 	public void mouseUp(MouseEvent e, int x, int y) {
 
 		Location to = Convert.xy2Location(x, y);
-		pointLastMovedTo = new Point(x, y);
+		pointTo = new Point(x, y);
 
 		for (Figure f : editor().drawing().selection()) {
 
 			if (playerMovesHisChecker(f)) {
 				if (!(game.move(lastFromLocation, to))) {
-					
-					System.out
-							.println("The move from " + lastFromLocation + " to " + to + " is illegal");
+
+					System.out.println("The move from " + lastFromLocation
+							+ " to " + to + " is illegal");
 					moveBackToOriginalPosition();
 				}
 			}
 
 		}
-		pointLastMovedTo = null;
-		pointLastMovedFrom = null;
+
 		super.mouseUp(e, x, y);
 	}
 
 	public void mouseDown(MouseEvent e, int x, int y) {
 
-		Location from = Convert.xy2Location(x, y);
-		lastFromLocation = from;
-		pointLastMovedFrom = new Point(x, y);
 		super.mouseDown(e, x, y);
+		//if(there is a checker on this location){
+		Location from = Convert.xy2Location(x, y);
+		//}
+		System.out.println("From is " + from);
 
-	}
+		lastFromLocation = from;
+		pointFrom = new Point(x, y);
+		
+
+}
 
 	private void moveBackToOriginalPosition() {
 
+		System.out
+				.println("Dragged figure "
+						+ Convert.xy2Location((int) pointFrom.getX(),
+								(int) pointTo.getX()) + "to " 
+						+ Convert.xy2Location((int) pointFrom.getY(), (int) pointTo.getY()));
+
 		for (Figure f : editor().drawing().selection()) {
 
-			int xToMove = -1
-					* (int) (pointLastMovedTo.getX() - pointLastMovedFrom
-							.getX());
-			int yToMove = -1
-					* (int) (pointLastMovedTo.getY() - pointLastMovedFrom
-							.getY());
+			int xToMove = (int) (pointFrom.getX() - pointTo.getX());
+			int yToMove = (int) (pointFrom.getY() - pointTo.getY());
 
 			f.moveBy(xToMove, yToMove);
+
 		}
 
 	}

@@ -2,6 +2,8 @@ package frs.hotgammon.states;
 
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.Location;
+import frs.hotgammon.tests.stub.DiceRollStateStub;
+import frs.hotgammon.tests.stub.MoveCheckerStateStub;
 
 public class GameStateImpl implements GameState {
 	

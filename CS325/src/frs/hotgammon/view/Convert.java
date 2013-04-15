@@ -91,6 +91,8 @@ public class Convert {
   }
 
   private static Map<Location,Rectangle> mapLocation2Rectangle;
+  
+  
   private static void defineLocation2RectangleMap() {
     mapLocation2Rectangle = new HashMap<Location,Rectangle>();
      // Black normal points

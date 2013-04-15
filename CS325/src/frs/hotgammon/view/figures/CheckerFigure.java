@@ -5,7 +5,7 @@ import minidraw.standard.ImageFigure;
 
 public class CheckerFigure extends ImageFigure {
 	
-	private Color color;
+	private Color color = Color.NONE;
 
 	public CheckerFigure(Color color, Point point) {
 		

@@ -188,10 +188,13 @@ public class StandardDrawingView
    * currently active tool.
    */
   public void mousePressed(MouseEvent e) {
+	  
+	
     requestFocus();
     Point p = constrainPoint(new Point(e.getX(), e.getY()));
     fLastClick = new Point(e.getX(), e.getY());
     editor.tool().mouseDown(e, p.x, p.y);
+    
   }
 
   /**
@@ -199,8 +202,11 @@ public class StandardDrawingView
    * currently active tool.
    */
   public void mouseDragged(MouseEvent e) {
+	  
+	  
     Point p = constrainPoint(new Point(e.getX(), e.getY()));
     editor.tool().mouseDrag(e, p.x, p.y);
+    
   }
 
   /**
@@ -216,8 +222,10 @@ public class StandardDrawingView
    * currently active tool.
    */
   public void mouseReleased(MouseEvent e) {
+	  
     Point p = constrainPoint(new Point(e.getX(), e.getY()));
     editor.tool().mouseUp(e, p.x, p.y);
+    
   }
 
   // These listener methods are not interesting.
