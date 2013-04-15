@@ -1,18 +1,27 @@
 package frs.hotgammon.view.figures;
-
 import java.awt.Point;
-
+import frs.hotgammon.framework.Color;
 import minidraw.standard.ImageFigure;
 
 public class CheckerFigure extends ImageFigure {
+	
+	private Color color;
 
-	public CheckerFigure(String string, Point point) {
+	public CheckerFigure(Color color, Point point) {
 		
-		super(string, point);
-		//zmien to tak jak G zeby nie byl to string
-		System.out.println("Checker figure was invoked");
-		
+		super(color.toString().toLowerCase() + "checker", point);
+		this.color = color;
+		System.out.println("Checker was created");
 	}
-
+	
+	public Color getColor() {
+		return color;
+	
+	}
+	
+	public String toString() {
+		
+		return "checker";
+	}
 
 }

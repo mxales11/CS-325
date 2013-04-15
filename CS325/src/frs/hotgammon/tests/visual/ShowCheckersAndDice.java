@@ -5,9 +5,11 @@ import minidraw.framework.*;
 
 import java.awt.*;
 import javax.swing.*;
+import frs.hotgammon.framework.Color;
 
 import frs.hotgammon.common.GameImpl;
 import frs.hotgammon.framework.Game;
+import frs.hotgammon.framework.GameObserver;
 import frs.hotgammon.tests.stub.StubGame1;
 import frs.hotgammon.view.drawings.BackGammonDrawing;
 import frs.hotgammon.view.figures.CheckerFigure;
@@ -17,6 +19,8 @@ import frs.hotgammon.view.tools.CheckerMoveTool;
 import frs.hotgammon.view.tools.DiceRollTool;
 import frs.hotgammon.variants.*;
 import frs.hotgammon.variants.rules.AlphaMon;
+import frs.hotgammon.variants.rules.BetaMon;
+import frs.hotgammon.variants.rules.GammaMon;
 
 /** Show the dice and some checkers on the
  * backgammon board.  
@@ -39,11 +43,16 @@ public class ShowCheckersAndDice {
 	
 	
   public static void main(String[] args) {
+	
+	  //Game game = new StubGame1();
 	  
-	 //Game game = new GameImpl(new AlphaMon());
-	  Game game = new StubGame1();
-
-
+	  Game game = new GameImpl(new AlphaMon());
+	  game.newGame();
+	  
+	  //normalnie to to jest invoked jak dice are clicked, skad sie biora pierwsze kosci?
+	  game.nextTurn();
+	 
+	  
     DrawingEditor editor = 
       new MiniDrawApplication( "Show HotGammon figures...",  
                                new HotGammonFactory() );
@@ -57,17 +66,24 @@ public class ShowCheckersAndDice {
     editor.drawing().add(redDie);
     editor.drawing().add(blackDie);
     
-    Figure bc = new CheckerFigure("blackchecker", new Point(21,21));
+    Figure bc = new CheckerFigure(Color.BLACK, new Point(21,21));
+    Figure bcnext = new CheckerFigure(Color.BLACK, new Point(32,372));
     editor.drawing().add(bc);
-    Figure rc = new CheckerFigure("redchecker", new Point(507,390));
+    editor.drawing().add(bcnext);
+    
+    Figure rc = new CheckerFigure(Color.RED, new Point(507,390));
+    Figure rcnext = new CheckerFigure(Color.RED, new Point(500,390));
     editor.drawing().add(rc);
+    editor.drawing().add(rcnext);
 
     //editor.setTool( new SelectionTool(editor) );
     editor.setTool(new BackgammonTool(editor, game));
     
-    //is it where the new game starts?
+
+    game.addObserver((GameObserver)(editor.drawing()));
     
-    System.out.println(game.getGameState());
+    
+
   }
 }
 
@@ -81,6 +97,7 @@ class HotGammonFactory implements Factory {
   public Drawing createDrawing( DrawingEditor editor ) {
     //return new StandardDrawing();
 	  return new BackGammonDrawing();
+	  
   }
 
   public JTextField createStatusField( DrawingEditor editor ) {

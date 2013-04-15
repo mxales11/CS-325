@@ -26,10 +26,8 @@ public class StubGame1 implements Game {
 	private GameStateImpl currentState;
 	private ArrayList<GameObserver> gameObserversList = new ArrayList<GameObserver>();
 
-
 	public StubGame1() {
-		//game starts by itself
-		newGame();
+		
 	}
 	
 	public void setCurrentState(GameStateImpl gameState) {
@@ -69,6 +67,10 @@ public class StubGame1 implements Game {
 		movesLeft = 2;
 		tictac = !tictac;
 		System.out.println("nextTurn: " + turn);
+		
+		for (int i = 0; i < gameObserversList.size(); i++) {
+			gameObserversList.get(i).diceRolled(diceThrown());
+		}
 	}
 
 	/**
@@ -87,7 +89,15 @@ public class StubGame1 implements Game {
 		} 
 		else if (to == null) {
 			
+			//it never equals null cause Convert returns the closest location
 			System.out.println("You cannot move to empty location");
+			return false;
+		}
+		
+		
+		else if(Location.distance(from, to)==0) {
+			
+			System.out.println("You cannot move to itself");
 			return false;
 		}
 		else {
@@ -96,6 +106,12 @@ public class StubGame1 implements Game {
 			return false;
 		}
 		movesLeft--;
+		
+		
+
+		for (int i = 0; i < gameObserversList.size(); i++) {
+			gameObserversList.get(i).checkerMove(from, to);
+		}
 		return true;
 	}
 	

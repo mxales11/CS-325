@@ -15,14 +15,13 @@ import frs.hotgammon.view.tools.BackgammonTool;
 
 public class BackGammonDrawing  extends StandardDrawing implements GameObserver  {
 	
-	//this drawing can redraw drawing but not move staff,it's not a mouse up
 	//to juz chyba nie potrzebuje States bo  robi wszystko w dobrym momencie
-	
 	
 	public BackGammonDrawing() {
 		
 	}
-
+	
+	//add that as game observer
 	private ArrayList<CheckerFigure> checkerList = new ArrayList<CheckerFigure>();
 	private ArrayList<DieFigure> diceList = new ArrayList<DieFigure>();
 	
@@ -45,12 +44,12 @@ public class BackGammonDrawing  extends StandardDrawing implements GameObserver 
 		
 	}
 
-	
-	
-	
+
 	@Override
 	public void checkerMove(Location from, Location to) {
 		
+		//jezeli tu doszlo to znaczy ze move jest legal
+		System.out.println("CHECKER MOVE METHOD WAS INVOKED");
 		//redraw checkers
 	}
 	
@@ -59,8 +58,8 @@ public class BackGammonDrawing  extends StandardDrawing implements GameObserver 
 	@Override
 	public void diceRolled(int[] values) {
 		
-		//redraw diceValues
-		
+		System.out.println("DICE ROLLED METHOD WAS INVOKED");
+		//redraw diceValues	
 	}
 
 }

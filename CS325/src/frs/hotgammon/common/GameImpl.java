@@ -13,6 +13,7 @@ import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.GameObserver;
 import frs.hotgammon.framework.Location;
 import frs.hotgammon.states.GameState;
+import frs.hotgammon.states.GameStateImpl;
 import frs.hotgammon.states.MoveCheckerState;
 
 public class GameImpl implements Game {
@@ -27,14 +28,14 @@ public class GameImpl implements Game {
 	private int[] diceValuesLeft;
 	private boolean changePlayer = false;
 	private boolean movesDoubled = false;
-	
+
 	private MoveValidator moveValidator;
 	private TurnDeterminer turnDeterminer;
 	private RollDeterminer rollDeterminer;
 	private WinnerDeterminer winnerDeterminer;
-
 	private RulesFactory rulesFactory;
-	
+
+	private GameStateImpl currentState;
 	private ArrayList<GameObserver> gameObserversList = new ArrayList<GameObserver>();
 
 	public int getNumberOfMovesMade() {
@@ -103,6 +104,9 @@ public class GameImpl implements Game {
 		board = new BoardImpl(25);
 		resetGame();
 		this.rulesFactory.setGame(this);
+		System.out.println("New game was started");
+		currentState = new GameStateImpl(this);
+		System.out.println("Current state is: " + currentState);
 
 	}
 
@@ -185,15 +189,15 @@ public class GameImpl implements Game {
 	}
 
 	public Color getPlayerInTurn() {
+		
+		System.out.println("Player in turn is" + playerInTurn);
 		return playerInTurn;
-
 	}
 
 	public void setDieValueLeft(int firstDie, int secondDie) {
 
 		if (diceValuesLeft == null) {
 			diceValuesLeft = new int[2];
-
 		}
 
 		diceValuesLeft[0] = firstDie;
@@ -215,7 +219,18 @@ public class GameImpl implements Game {
 
 	public int[] diceThrown() {
 
-		return rollDeterminer.diceThrown();
+		int[] diceThrown = rollDeterminer.diceThrown();
+
+		if (diceThrown != null) {
+			System.out.println("Dice thrown are " + diceThrown[0] + " and "
+					+ diceThrown[1]);
+		}
+
+		else {
+			System.out.println("DICE THROWN ARE NULL");
+		}
+
+		return diceThrown;
 	}
 
 	public ArrayList<Integer> convertArrayIntoArrayList() {
@@ -278,6 +293,13 @@ public class GameImpl implements Game {
 		if (diceValuesLeft != null && diceValuesLeft.length == NUMBER_OF_DICE) {
 			Arrays.sort(diceValuesLeft);
 			reverseArrayWith2Elements(diceValuesLeft);
+		}
+
+		if (diceValuesLeft != null) {
+
+			for (int i = 0; i < diceValuesLeft.length; i++) {
+				System.out.println("Dice values left are " + diceValuesLeft[i]);
+			}
 		}
 		return diceValuesLeft;
 	}
@@ -347,16 +369,17 @@ public class GameImpl implements Game {
 	}
 
 	@Override
-	public void addObserver(GameObserver observer) {
-
-		gameObserversList.add(observer);
-
+	public GameState getGameState() {
+		return currentState;
 	}
 
 	@Override
-	public GameState getGameState() {
-		return currentState;
-		
+	public void addObserver(GameObserver observer) {
+		gameObserversList.add(observer);
+	}
+
+	public void setCurrentState(GameStateImpl gameState) {
+		this.currentState = gameState;
 	}
 
 }
