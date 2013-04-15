@@ -50,15 +50,20 @@ public class BackgammonTool extends SelectionTool {
 	}
 
 	public void mouseDown(MouseEvent e, int x, int y) {
-		
+
 		System.out.println("Mouse down is" + x + "," + y);
-		
+
 		currentTool = getCurrentTool();
 
-		System.out.println("CURRENT TOOL IS" + currentTool);
+		for (Figure f : editor().drawing().selection()) {
 
-		currentTool.mouseDown(e, x, y);
+			if (toolMovesItsFigure(f, currentTool)) {
 
+				System.out.println("CURRENT TOOL IS" + currentTool);
+				currentTool.mouseDown(e, x, y);
+			}
+
+		}
 		if (currentTool instanceof NullTool) {
 			printWarning();
 		}
@@ -85,9 +90,12 @@ public class BackgammonTool extends SelectionTool {
 	}
 
 	private boolean toolMovesItsFigure(Figure f, Tool t) {
-		
-		boolean toReturn = t.toString().toLowerCase().indexOf(f.toString().toLowerCase()) != -1 ? true
-				: false;
+
+		boolean toReturn = t.toString().toLowerCase()
+				.indexOf(f.toString().toLowerCase()) != -1 ? true : false;
+		System.out.println(t.toString().toLowerCase());
+		System.out.println(f.toString().toLowerCase());
+		System.out.println("CHECKER MOVES ITS FIGURE " + toReturn);
 		return toReturn;
 
 	}

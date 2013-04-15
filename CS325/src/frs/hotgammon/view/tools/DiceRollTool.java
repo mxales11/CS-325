@@ -18,7 +18,7 @@ public class DiceRollTool extends AbstractTool {
 		System.out.println("CHANGE DIE VALUES");
 		game.nextTurn();	
 	}
-	
+
 	
 	
 	public String toString() {	

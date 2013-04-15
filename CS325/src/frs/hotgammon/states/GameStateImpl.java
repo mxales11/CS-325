@@ -15,10 +15,9 @@ public class GameStateImpl implements GameState {
 		this.moveCheckerState = new MoveCheckerState(game);
 		this.diceRollState = new DiceRollState(game);
 		
-		
 		//change current State to roll dice first
-		//this.currentState = diceRollState;
-		this.currentState = moveCheckerState;
+		this.currentState = diceRollState;
+		//this.currentState = moveCheckerState;
 	}
 
 	

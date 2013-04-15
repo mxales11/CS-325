@@ -84,17 +84,7 @@ public class StubGame1 implements Game {
 	public void nextTurn() {
 		
 		currentState.nextTurn();
-		/**
-		turn++;
-		movesLeft = 2;
-		tictac = !tictac;
-		System.out.println("nextTurn: " + turn);
 		
-		for (int i = 0; i < gameObserversList.size(); i++) {
-			gameObserversList.get(i).diceRolled(diceThrown());
-		}
-		
-		**/
 	}
 
 	/**
@@ -102,46 +92,8 @@ public class StubGame1 implements Game {
 	 */
 	public boolean move(Location from, Location to) {
 		
-		
 		return currentState.move(from, to);
 		
-		/**
-		if (to != Location.B3 && to != Location.R3 && to != null) {
-			System.out.println("GAME: moving from " + from + " to " + to);
-			if (from == loneRiderHere1) {
-				loneRiderHere1 = to;
-			} else if (from == loneRiderHere2) {
-				loneRiderHere2 = to;
-			}
-		} 
-		else if (to == null) {
-			
-			//it never equals null cause Convert returns the closest location
-			System.out.println("You cannot move to empty location");
-			return false;
-		}
-		
-		
-		else if(Location.distance(from, to)==0) {
-			
-			System.out.println("You cannot move to itself");
-			return false;
-		}
-		else {
-			System.out
-					.println("GAME: Moving to B3/R3 is illegal (testing purposes)");
-			return false;
-		}
-		movesLeft--;
-		
-		
-
-		for (int i = 0; i < gameObserversList.size(); i++) {
-			gameObserversList.get(i).checkerMove(from, to);
-		}
-		return true;
-		
-		**/
 	}
 	
 

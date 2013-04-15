@@ -18,32 +18,39 @@ import frs.hotgammon.states.MoveCheckerState;
 
 public class GameImpl implements Game {
 
-	private Color playerInTurn = Color.NONE;
-	private int turnNumber = 0;
+	public Color playerInTurn = Color.NONE;
 	private Board board;
-	private int numberOfMovesMade = 0;
-	private static final int NUMBER_OF_DICE = 2;
-	private static final int MINIMAL_NUM_OF_MOVES_TO_WIN_GAME = 6;
+	
+	public int turnNumber = 0;
+	public int[] diceValuesLeft;
+	public int numberOfMovesMade = 0;
+	public boolean changePlayer = false;
+	public boolean movesDoubled = false;
+	public int currentDistanceTravelled = 0;
+	public static final int NUMBER_OF_DICE = 2;
+	public static final int MINIMAL_NUM_OF_MOVES_TO_WIN_GAME = 6;
 	public static final int STANDARD_NUM_OF_MOVES = 2;
-	private int currentDistanceTravelled = 0;
-	private int[] diceValuesLeft;
-	private boolean changePlayer = false;
-	private boolean movesDoubled = false;
-
+	
 	private MoveValidator moveValidator;
 	private TurnDeterminer turnDeterminer;
 	private RollDeterminer rollDeterminer;
 	private WinnerDeterminer winnerDeterminer;
 	private RulesFactory rulesFactory;
 
-	private GameStateImpl currentState;
+	private GameState currentState;
 	private ArrayList<GameObserver> gameObserversList = new ArrayList<GameObserver>();
 
+	
+	public void setState(GameState gameState){
+		this.currentState = gameState;
+	}
+	
 	public int getNumberOfMovesMade() {
 
 		return numberOfMovesMade;
 	}
 
+	
 	public RulesFactory getRulesFactory() {
 		return rulesFactory;
 	}
@@ -118,21 +125,22 @@ public class GameImpl implements Game {
 	}
 
 	public void nextTurn() {
-
-		numberOfMovesMade = 0;
-		rollDeterminer.rollDice(turnNumber);
-		diceValuesLeft = diceThrown().clone();
-
-		if (turnNumber == 0) {
-			playerInTurn = getStartingPlayer();
-		}
-
-		rulesFactory.createTurnDeterminer().nextTurn(changePlayer);
-		turnNumber++;
-
-		for (int i = 0; i < gameObserversList.size(); i++) {
-			gameObserversList.get(i).diceRolled(diceThrown());
-		}
+		
+		
+		currentState.nextTurn();
+		
+		/**
+		 * numberOfMovesMade = 0; rollDeterminer.rollDice(turnNumber);
+		 * diceValuesLeft = diceThrown().clone();
+		 * 
+		 * if (turnNumber == 0) { playerInTurn = getStartingPlayer(); }
+		 * 
+		 * rulesFactory.createTurnDeterminer().nextTurn(changePlayer);
+		 * turnNumber++;
+		 * 
+		 * for (int i = 0; i < gameObserversList.size(); i++) {
+		 * gameObserversList.get(i).diceRolled(diceThrown()); }
+		 **/
 
 	}
 
@@ -141,18 +149,24 @@ public class GameImpl implements Game {
 		if ((diceThrown()[0]) != (diceThrown()[1])) {
 			return diceThrown()[0] > diceThrown()[1] ? Color.RED : Color.BLACK;
 		}
+		
+		System.out.println("Starting player is null");
 		return Color.NONE;
 
 	}
 
-	private void sendToTheBar(Location from, Location to) {
+	public void sendToTheBar(Location from, Location to) {
 		Color player = this.getColor(to);
 		Location bar = player == Color.RED ? Location.R_BAR : Location.B_BAR;
 		this.getBoard().move(to, bar);
 	}
 
 	public boolean move(Location from, Location to) {
+		
+		
+		return currentState.move(from, to);
 
+		/**
 		if (diceThrownEqual()) {
 			movesDoubled = true;
 		}
@@ -185,6 +199,7 @@ public class GameImpl implements Game {
 			return true;
 		}
 		return false;
+		**/
 	}
 
 	public Color getPlayerInTurn() {
@@ -251,7 +266,7 @@ public class GameImpl implements Game {
 
 	}
 
-	private void updateDiceValuesLeft() {
+	public void updateDiceValuesLeft() {
 
 		ArrayList<Integer> diceValuesLeftList = convertArrayIntoArrayList();
 		int index = diceValuesLeftList.indexOf(currentDistanceTravelled);
@@ -382,6 +397,11 @@ public class GameImpl implements Game {
 		int movesLeft = moveValidator.getNumberOfMovesLeft();
 		System.out.println(movesLeft);
 		return movesLeft;
+	}
+	
+	public ArrayList<GameObserver> getGameObserversList() {
+		
+		return gameObserversList;
 	}
 
 }

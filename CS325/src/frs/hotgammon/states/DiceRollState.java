@@ -1,18 +1,20 @@
 package frs.hotgammon.states;
 
 import java.util.ArrayList;
-
+import frs.hotgammon.common.GameImpl;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.GameObserver;
 import frs.hotgammon.framework.Location;
+import frs.hotgammon.states.GameState;
+import frs.hotgammon.states.MoveCheckerState;
 import frs.hotgammon.tests.stub.*;
 
 public class DiceRollState implements GameState {
 
-	private StubGame1 game;
+	private GameImpl game;
 
 	public DiceRollState(Game game) {
-		this.game = (StubGame1)game;
+		this.game = (GameImpl) game;
 	}
 
 	@Override
@@ -23,26 +25,31 @@ public class DiceRollState implements GameState {
 
 	@Override
 	public void nextTurn() {
-		//move code from game
-		
-		game = ((StubGame1)game);
-		
-		game.turn++;
-		((StubGame1)game).maxNumberOfMoves();
-		((StubGame1)game).tictac = !((StubGame1)game).tictac;
-		System.out.println("nextTurn: " + ((StubGame1)game).getTurn());
-		ArrayList<GameObserver> observers = game.gameObserversList;
-		
-		for (int i = 0; i < observers.size(); i++) {
-			observers.get(i).diceRolled(((StubGame1)game).diceThrown());
+		// move code from game
+
+		game.numberOfMovesMade = 0;
+		game.getRollDeterminer().rollDice(game.turnNumber);
+		game.diceValuesLeft = game.diceThrown().clone();
+
+		if (game.turnNumber == 0) {
+			game.playerInTurn = game.getStartingPlayer();
+
 		}
-		
+
+		game.getRulesFactory().createTurnDeterminer().nextTurn(game.changePlayer);
+
+		game.turnNumber++;
+
+		for (int i = 0; i < game.getGameObserversList().size(); i++) {
+			game.getGameObserversList().get(i).diceRolled(game.diceThrown());
+
+		}
 		game.setState(new MoveCheckerState(game));
-		
+
 	}
-	
+
 	public String toString() {
-	
+
 		return "DiceRollState";
 	}
 
