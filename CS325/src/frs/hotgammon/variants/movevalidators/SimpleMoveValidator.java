@@ -9,6 +9,7 @@ public class SimpleMoveValidator implements MoveValidator {
 
 	private Game game;
 
+
 	public SimpleMoveValidator() {
 
 	}
@@ -59,6 +60,12 @@ public class SimpleMoveValidator implements MoveValidator {
 		return coreValidMove(from)
 				&& (notMoreThanTwoMoves() || (movesDoubled()))
 				&& (checkerIsMovedToEmptyLocation(to) || checkerIsPlacedOnTheSameColor(to));
+	}
+
+	@Override
+	public int getNumberOfMovesLeft() {
+		
+		return GameImpl.STANDARD_NUM_OF_MOVES  - game.getNumberOfMovesMade();
 	}
 
 }

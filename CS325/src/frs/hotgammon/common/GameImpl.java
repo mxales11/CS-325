@@ -24,6 +24,7 @@ public class GameImpl implements Game {
 	private int numberOfMovesMade = 0;
 	private static final int NUMBER_OF_DICE = 2;
 	private static final int MINIMAL_NUM_OF_MOVES_TO_WIN_GAME = 6;
+	public static final int STANDARD_NUM_OF_MOVES = 2;
 	private int currentDistanceTravelled = 0;
 	private int[] diceValuesLeft;
 	private boolean changePlayer = false;
@@ -119,9 +120,7 @@ public class GameImpl implements Game {
 	public void nextTurn() {
 
 		numberOfMovesMade = 0;
-
 		rollDeterminer.rollDice(turnNumber);
-
 		diceValuesLeft = diceThrown().clone();
 
 		if (turnNumber == 0) {
@@ -204,11 +203,7 @@ public class GameImpl implements Game {
 		diceValuesLeft[1] = secondDie;
 	}
 
-	public int getNumberOfMovesLeft() {
-		return NUMBER_OF_DICE - numberOfMovesMade;
-
-	}
-
+	
 	public boolean diceThrownAre12Or21() {
 
 		int[] diceThrown = diceThrown();
@@ -380,6 +375,13 @@ public class GameImpl implements Game {
 
 	public void setCurrentState(GameStateImpl gameState) {
 		this.currentState = gameState;
+	}
+	
+	public int getNumberOfMovesLeft() {
+		
+		int movesLeft = moveValidator.getNumberOfMovesLeft();
+		System.out.println(movesLeft);
+		return movesLeft;
 	}
 
 }

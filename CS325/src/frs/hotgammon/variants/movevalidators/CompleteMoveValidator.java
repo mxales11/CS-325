@@ -14,6 +14,8 @@ import frs.hotgammon.framework.Location;
 public class CompleteMoveValidator implements MoveValidator {
 
 	private Game game;
+	private static final int DOUBLE = 2;
+	
 
 	public CompleteMoveValidator() {
 
@@ -235,7 +237,16 @@ public class CompleteMoveValidator implements MoveValidator {
 	private boolean attemptsToBearOff(Location to) {
 		return to == Location.R_BEAR_OFF || to == Location.B_BEAR_OFF;
 	}
+
+
 	
+	
+	@Override
+	public int getNumberOfMovesLeft() {
+		
+		return movesDoubled()? DOUBLE * GameImpl.STANDARD_NUM_OF_MOVES  - game.getNumberOfMovesMade() : GameImpl.STANDARD_NUM_OF_MOVES  - game.getNumberOfMovesMade();
+
+	}
 	
 
 }

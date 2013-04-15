@@ -63,8 +63,7 @@ public  class SelectionTool extends AbstractTool implements Tool {
    */
   public void mouseDown(MouseEvent e, int x, int y)
   {
-	  
-	System.out.println("Mouse down was invoked");
+	
     Drawing model = editor().drawing();
     
     model.lock();

@@ -15,7 +15,7 @@ public class DieFigure extends ImageFigure {
 	
 	public String toString() {
 		
-		return "die";
+		return "dice";
 	}
 
 }

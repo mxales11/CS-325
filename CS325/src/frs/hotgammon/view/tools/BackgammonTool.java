@@ -1,7 +1,6 @@
 package frs.hotgammon.view.tools;
 
 import java.awt.event.MouseEvent;
-
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.view.figures.CheckerFigure;
 import minidraw.framework.DrawingEditor;
@@ -52,8 +51,7 @@ public class BackgammonTool extends SelectionTool {
 
 	public void mouseDown(MouseEvent e, int x, int y) {
 		
-		System.out.println("Mouse down is" + x);
-		System.out.println("Mouse down is" + y);
+		System.out.println("Mouse down is" + x + "," + y);
 		
 		currentTool = getCurrentTool();
 
@@ -90,8 +88,6 @@ public class BackgammonTool extends SelectionTool {
 		
 		boolean toReturn = t.toString().toLowerCase().indexOf(f.toString().toLowerCase()) != -1 ? true
 				: false;
-
-		System.out.println("TO RETURN IS" + toReturn);
 		return toReturn;
 
 	}

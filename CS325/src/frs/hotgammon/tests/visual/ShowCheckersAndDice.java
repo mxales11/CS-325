@@ -44,9 +44,9 @@ public class ShowCheckersAndDice {
 	
   public static void main(String[] args) {
 	
-	  //Game game = new StubGame1();
+	  Game game = new StubGame1();
 	  
-	  Game game = new GameImpl(new AlphaMon());
+	  //Game game = new GameImpl(new AlphaMon());
 	  game.newGame();
 	  
 	  //normalnie to to jest invoked jak dice are clicked, skad sie biora pierwsze kosci?

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import frs.hotgammon.Board;
 import frs.hotgammon.RollDeterminer;
 import frs.hotgammon.common.BoardImpl;
+import frs.hotgammon.common.GameImpl;
 import frs.hotgammon.framework.*;
 import frs.hotgammon.states.DiceRollState;
 import frs.hotgammon.states.GameState;
@@ -23,27 +24,30 @@ import frs.hotgammon.states.MoveCheckerState;
  */
 public class StubGame1 implements Game {
 
-	private GameStateImpl currentState;
-	private ArrayList<GameObserver> gameObserversList = new ArrayList<GameObserver>();
+	private GameState currentState;
+	public ArrayList<GameObserver> gameObserversList = new ArrayList<GameObserver>();
 
 	public StubGame1() {
 		
 	}
 	
-	public void setCurrentState(GameStateImpl gameState) {
-
-		this.currentState = gameState;
-
+	public void setState(GameState state) {
+		
+		currentState = state;
+		
 	}
+	
+	
 
 	// Here I only have one red and one
 	// black checker on the board!
-	Location loneRiderHere1, loneRiderHere2;
+	public Location loneRiderHere1;
+	public Location loneRiderHere2;
 
 	// toggle between player in turn
-	boolean tictac = true;
+	public boolean tictac = true;
 	// moves left to make for a player
-	int movesLeft;
+	public int movesLeft;
 
 	public void newGame() {
 		
@@ -60,9 +64,27 @@ public class StubGame1 implements Game {
 	}
 
 	// count turns, used to simulate dice rolling
-	int turn;
+	public int turn;
+	
+	public int getTurn() {
+		
+		return turn;
+	}
 
+	
+	
+	
+	public void  maxNumberOfMoves(){
+		
+		movesLeft = 2;
+	}
+	
+	
+	
 	public void nextTurn() {
+		
+		currentState.nextTurn();
+		/**
 		turn++;
 		movesLeft = 2;
 		tictac = !tictac;
@@ -71,6 +93,8 @@ public class StubGame1 implements Game {
 		for (int i = 0; i < gameObserversList.size(); i++) {
 			gameObserversList.get(i).diceRolled(diceThrown());
 		}
+		
+		**/
 	}
 
 	/**
@@ -79,6 +103,9 @@ public class StubGame1 implements Game {
 	public boolean move(Location from, Location to) {
 		
 		
+		return currentState.move(from, to);
+		
+		/**
 		if (to != Location.B3 && to != Location.R3 && to != null) {
 			System.out.println("GAME: moving from " + from + " to " + to);
 			if (from == loneRiderHere1) {
@@ -113,6 +140,8 @@ public class StubGame1 implements Game {
 			gameObserversList.get(i).checkerMove(from, to);
 		}
 		return true;
+		
+		**/
 	}
 	
 
