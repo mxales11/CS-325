@@ -118,8 +118,17 @@ public class GameImpl implements Game {
 
 	public void changePlayer() {
 
-		playerInTurn = getPlayerInTurn() == Color.BLACK ? Color.RED
-				: Color.BLACK;
+		if (getPlayerInTurn() == Color.BLACK) {
+
+			playerInTurn = Color.RED;
+
+		} else if (getPlayerInTurn() == Color.RED) {
+
+			playerInTurn = Color.BLACK;
+		} else {
+			playerInTurn = Color.NONE;
+		}
+		
 	}
 
 	public void nextTurn() {
@@ -140,18 +149,17 @@ public class GameImpl implements Game {
 	}
 
 	public void sendToTheBar(Location from, Location to) {
-		
-		System.out.println("Was sent to the bar!!!!!!!!!!!!!! Invoke checkerMove to redraw");
+
+		System.out
+				.println("Was sent to the bar!!!!!!!!!!!!!! Invoke checkerMove to redraw");
 		Color player = this.getColor(to);
 		Location bar = player == Color.RED ? Location.R_BAR : Location.B_BAR;
 		this.getBoard().move(to, bar);
-		
-		
+
 		/**
-		for (int i = 0; i < this.gameObserversList.size(); i++) {
-			this.gameObserversList.get(i).checkerMove(to, bar);
-		}
-		**/
+		 * for (int i = 0; i < this.gameObserversList.size(); i++) {
+		 * this.gameObserversList.get(i).checkerMove(to, bar); }
+		 **/
 	}
 
 	public boolean move(Location from, Location to) {
@@ -360,7 +368,5 @@ public class GameImpl implements Game {
 
 		return gameObserversList;
 	}
-
-	
 
 }

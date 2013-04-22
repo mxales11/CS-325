@@ -29,30 +29,30 @@ public class DiceRollState implements GameState {
 	@Override
 	public void nextTurn() {
 		
-		
-		if(game.turnNumber!= 0 && game.getPlayerInTurn()==Color.NONE){
-			
-			game.nextTurn();
-			
-		}
-		else{
+
 			game.numberOfMovesMade = 0;
 			game.getRollDeterminer().rollDice(game.turnNumber);
 			game.diceValuesLeft = game.diceThrown().clone();
 	
-			if (game.turnNumber == 0) {
+			if (game.getPlayerInTurn()==Color.NONE) {
 				game.playerInTurn = game.getStartingPlayer();
-	
+				game.changePlayer = false;
 			}
-	
+			
+			
 			game.getRulesFactory().createTurnDeterminer().nextTurn(game.changePlayer);
 			game.turnNumber++;
 	
 			for (int i = 0; i < game.getGameObserversList().size(); i++) {
 				game.getGameObserversList().get(i).diceRolled(game.diceThrown());
 			}
-			game.setState(new MoveCheckerState(game));
-		}
+			
+			if(game.playerInTurn!=Color.NONE){
+				game.setState(new MoveCheckerState(game));
+			}
+			
+			
+		
 	}
 	
 

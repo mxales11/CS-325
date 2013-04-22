@@ -40,6 +40,8 @@ public class HotgammonTool extends SelectionTool {
 	public void mouseUp(MouseEvent e, int x, int y) {
 
 		for (Figure f : editor().drawing().selection()) {
+			
+			System.out.println("Current state is "+ game.getGameState());
 
 			if (toolMovesItsFigure(f, currentTool) && currentTool != null
 					&& !(currentTool instanceof NullTool)) {

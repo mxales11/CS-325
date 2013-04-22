@@ -6,6 +6,7 @@ import frs.hotgammon.RulesFactory;
 import frs.hotgammon.TurnDeterminer;
 import frs.hotgammon.WinnerDeterminer;
 import frs.hotgammon.framework.Game;
+import frs.hotgammon.mytests.dicegenerators.DiceGenerator44;
 import frs.hotgammon.variants.movevalidators.CompleteMoveValidator;
 import frs.hotgammon.variants.randomdicegenerators.ReallyRandomDiceGenerator;
 import frs.hotgammon.variants.rolldeterminers.RandomRollDeterminer;

@@ -71,7 +71,7 @@ public class MoveCheckerState implements GameState {
 
 	private boolean noMovesLeft() {
 
-		return (game.getNumberOfMovesLeft() == 0);
+		return (game.getNumberOfMovesLeft() <= 0);
 	}
 
 	@Override
