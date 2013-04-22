@@ -24,6 +24,7 @@ public abstract class CompositeFigure
 
   public synchronized Figure add(Figure figure) {
     if ( ! fFigures.contains(figure) ) {
+    System.out.println("Composite figure added checker");
       fFigures.add(figure);
       figure.addFigureChangeListener(this);
       figure.changed();
@@ -33,6 +34,7 @@ public abstract class CompositeFigure
 
   public synchronized Figure remove(Figure figure) {
     if ( fFigures.contains(figure) ) {
+        System.out.println("Composite figure removed checker");
       fFigures.remove(figure);
       figure.changed();
       figure.removeFigureChangeListener(this);

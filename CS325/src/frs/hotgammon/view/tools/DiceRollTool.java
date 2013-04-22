@@ -15,7 +15,6 @@ public class DiceRollTool extends AbstractTool {
 	}
 
 	public void mouseUp(MouseEvent e, int x, int y) {
-		System.out.println("CHANGE DIE VALUES");
 		game.nextTurn();	
 	}
 

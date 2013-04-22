@@ -91,13 +91,11 @@ public class HotgammonTool extends SelectionTool {
 		return super.toString();
 	}
 
-	private boolean toolMovesItsFigure(Figure f, Tool t) {
+	private boolean toolMovesItsFigure(Figure f, Tool tool) {
 
-		System.out.println(f);
-
-		boolean toReturn = t.toString().toLowerCase()
+		boolean toReturn = tool.toString().toLowerCase()
 				.indexOf(f.toString().toLowerCase()) != -1 ? true : false;
-		return toReturn && t != null;
+		return toReturn && tool != null;
 
 	}
 

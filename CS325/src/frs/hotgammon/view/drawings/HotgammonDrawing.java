@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Set;
-
 import minidraw.customized.helpers.Coordinates;
 import minidraw.framework.DrawingEditor;
 import minidraw.framework.Figure;
@@ -110,14 +109,16 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 
 	public Figure add(Figure figure) {
 
-		if (figure instanceof CheckerFigure) {
+		if (figure.toString().equals("checker")) {
 			checkerList.add((CheckerFigure) figure);
 		}
 
-		if (figure instanceof DieFigure) {
+		if (figure.toString().equals("dice")) {
+
 			diceList.add((DieFigure) figure);
 		}
 
+		System.out.println("ADD WAS INVOKED");
 		return super.add(figure);
 
 	}
@@ -130,6 +131,7 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 		}
 
 		if (figure instanceof DieFigure) {
+			System.out.println("Instance of die figure");
 			diceList.remove((DieFigure) figure);
 		}
 
@@ -138,52 +140,72 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 
 	}
 
+	private Location getLocationToDrawTo(CheckerFigure foundFigure) {
+
+		Coordinates figureCenter = getFigureCenter(foundFigure.displayBox()
+				.getX(), foundFigure.displayBox().getY(), foundFigure
+				.displayBox().getWidth(), foundFigure.displayBox().getHeight());
+
+		Location locationToDrawTo = Convert.xy2Location(
+				(int) (figureCenter.getX()), (int) (figureCenter.getY()));
+
+		return locationToDrawTo;
+
+	}
+
+	private CheckerFigure createNewCheckerFigure(Location locationToDrawTo,
+			Color color) {
+
+		CheckerFigure newChecker = new CheckerFigure(color,
+				Convert.locationAndCount2xy(locationToDrawTo,
+						game.getCount((locationToDrawTo)) - 1));
+		return newChecker;
+
+	}
+
+	public boolean alreadyHasCheckerInThisLocation(CheckerFigure checkerFigure) {
+
+		for (int i = 0; i < checkerList.size(); i++) {
+
+			if (checkerList.get(i).equal(checkerFigure)) {
+
+				return true;
+			}
+		}
+
+		return false;
+
+	}
+
 	@Override
 	public void checkerMove(Location from, Location to) {
 
-		Figure foundFigure;
+		CheckerFigure foundFigure;
 		System.out.println("CHECKER MOVE METHOD WAS INVOKED");
 
 		for (Figure f : editor.drawing().selection()) {
-
-			foundFigure = f;
+			foundFigure = (CheckerFigure) f;
 
 			if (foundFigure != null) {
-					Color color = ((CheckerFigure) foundFigure).getColor();
-					Coordinates figureCenter = getFigureCenter(f.displayBox()
-							.getX(), f.displayBox().getY(), f.displayBox()
-							.getWidth(), f.displayBox().getHeight());
 
-					Location locationToDrawTo = Convert.xy2Location(
-							(int) (figureCenter.getX()),
-							(int) (figureCenter.getY()));
+				this.remove(foundFigure);
 
-					System.out.println(" Location to draw to "
-							+ locationToDrawTo + "with "
-							+ (game.getCount(locationToDrawTo) - 1));
-					this.remove(foundFigure);
+				Location locationToDrawTo = this
+						.getLocationToDrawTo(foundFigure);
+				CheckerFigure newChecker = this.createNewCheckerFigure(
+						locationToDrawTo, foundFigure.getColor());
 
-					this.add(new CheckerFigure(color, Convert
-							.locationAndCount2xy(locationToDrawTo,
-									game.getCount((locationToDrawTo)) - 1)));
-					foundFigure.displayBox();
-					this.figureChanged(new FigureChangeEvent(foundFigure));
-					this.changed();
-					
-					//zobacz czy w ogole potrzebujesz te 2 listy, moze zeby znalezc co tam bylo 
-					//if moved from the bar
-					if(to==Location.R_BAR || to ==Location.B_BAR) {
-						
-						
-						
-						
-					}
-				
-				
+				if (!alreadyHasCheckerInThisLocation(newChecker)) {
+					this.add(newChecker);
+				}
+
+				if (to == Location.R_BAR || to == Location.B_BAR) {
+					// redraw to bar
+				}
+
 			}
 
 			else {
-
 				System.out
 						.println("FOUND FIGURE IS NULL, MUST BE INITIALIZATION");
 			}

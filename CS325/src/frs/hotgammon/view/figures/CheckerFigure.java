@@ -14,6 +14,14 @@ public class CheckerFigure extends ImageFigure {
 		this.color = color;
 	}
 	
+	
+	public boolean equal(CheckerFigure checkerFigure) {
+		
+	
+		return this.point.getX()==checkerFigure.point.getX() && this.point.getY()==checkerFigure.point.getY();
+					
+	}
+	
 	public Color getColor() {
 		return color;
 	

@@ -112,8 +112,7 @@ public class GameImpl implements Game {
 		this.rulesFactory.setGame(this);
 		System.out.println("New game was started");
 		currentState = new GameStateImpl(this);
-		System.out.println("Current state is: " + currentState);
-
+	
 	}
 
 	public void changePlayer() {
@@ -268,13 +267,6 @@ public class GameImpl implements Game {
 		if (diceValuesLeft != null && diceValuesLeft.length == NUMBER_OF_DICE) {
 			Arrays.sort(diceValuesLeft);
 			reverseArrayWith2Elements(diceValuesLeft);
-		}
-
-		if (diceValuesLeft != null) {
-
-			for (int i = 0; i < diceValuesLeft.length; i++) {
-				System.out.println("Dice values left are " + diceValuesLeft[i]);
-			}
 		}
 		return diceValuesLeft;
 	}
