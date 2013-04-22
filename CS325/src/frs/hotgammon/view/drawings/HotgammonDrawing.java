@@ -5,6 +5,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Set;
+
 import minidraw.customized.helpers.Coordinates;
 import minidraw.framework.DrawingEditor;
 import minidraw.framework.Figure;
@@ -26,9 +28,15 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 
 	private ArrayList<CheckerFigure> checkerList = new ArrayList<CheckerFigure>();
 	private ArrayList<DieFigure> diceList = new ArrayList<DieFigure>();
+	private Game game;
+	private DrawingEditor editor;
 
-	public HotgammonDrawing() {
+	public HotgammonDrawing(DrawingEditor editor, Game game) {
+
+		this.editor = editor;
+		this.game = game;
 		initializeCheckers();
+
 	}
 
 	// read it from model instead of initializing here
@@ -133,31 +141,61 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 	@Override
 	public void checkerMove(Location from, Location to) {
 
+		Figure foundFigure;
 		System.out.println("CHECKER MOVE METHOD WAS INVOKED");
 
-		Point point1 = Convert.locationAndCount2xy(to, 0);
-		Point point2 = Convert.locationAndCount2xy(to, 1);
-		Point point3 = Convert.locationAndCount2xy(to, 2);
-		
-		Figure foundFigure = (findFigure(point1.x, point1.y) !=null) ? (findFigure(point1.x, point1.y)):
-			(findFigure(point2.x, point2.y)!=null ? (findFigure(point3.x, point3.y)) : findFigure(point2.x, point2.y));
+		for (Figure f : editor.drawing().selection()) {
 
-		if (foundFigure != null) {
-			System.out.println("Figure moved is" + foundFigure);
+			foundFigure = f;
 
-			Color color = ((CheckerFigure) foundFigure).getColor();
-			System.out.println(color);
-			this.remove(foundFigure);
-			this.add(new CheckerFigure(color, Convert
-					.locationAndCount2xy(to, 0)));
-			foundFigure.displayBox();
-			this.figureChanged(new FigureChangeEvent(foundFigure));
-			this.changed();
-		} else {
+			if (foundFigure != null) {
+					Color color = ((CheckerFigure) foundFigure).getColor();
+					Coordinates figureCenter = getFigureCenter(f.displayBox()
+							.getX(), f.displayBox().getY(), f.displayBox()
+							.getWidth(), f.displayBox().getHeight());
 
-			System.out.println("figure is null");
+					Location locationToDrawTo = Convert.xy2Location(
+							(int) (figureCenter.getX()),
+							(int) (figureCenter.getY()));
+
+					System.out.println(" Location to draw to "
+							+ locationToDrawTo + "with "
+							+ (game.getCount(locationToDrawTo) - 1));
+					this.remove(foundFigure);
+
+					this.add(new CheckerFigure(color, Convert
+							.locationAndCount2xy(locationToDrawTo,
+									game.getCount((locationToDrawTo)) - 1)));
+					foundFigure.displayBox();
+					this.figureChanged(new FigureChangeEvent(foundFigure));
+					this.changed();
+					
+					//zobacz czy w ogole potrzebujesz te 2 listy, moze zeby znalezc co tam bylo 
+					//if moved from the bar
+					if(to==Location.R_BAR || to ==Location.B_BAR) {
+						
+						
+						
+						
+					}
+				
+				
+			}
+
+			else {
+
+				System.out
+						.println("FOUND FIGURE IS NULL, MUST BE INITIALIZATION");
+			}
+
 		}
+	}
 
+	private Coordinates getFigureCenter(double x, double y, double width,
+			double height) {
+
+		final double HALF = 2.0;
+		return new Coordinates(x + (width / HALF), y + (height / HALF));
 	}
 
 	@Override

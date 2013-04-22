@@ -6,9 +6,11 @@ import minidraw.standard.ImageFigure;
 public class CheckerFigure extends ImageFigure {
 	
 	private Color color = Color.NONE;
+	private Point point;
 
 	public CheckerFigure(Color color, Point point) {
 		super(color.toString().toLowerCase() + "checker", point);
+		this.point = point;
 		this.color = color;
 	}
 	
@@ -16,6 +18,13 @@ public class CheckerFigure extends ImageFigure {
 		return color;
 	
 	}
+
+	public Point getPoint() {
+		
+		return point;
+	}
+		
+
 	
 	public String toString() {
 		

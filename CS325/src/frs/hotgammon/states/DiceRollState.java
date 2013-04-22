@@ -1,7 +1,10 @@
 package frs.hotgammon.states;
 
 import java.util.ArrayList;
+
+import assignments.chap5.breakthrough.Breakthrough.Player;
 import frs.hotgammon.common.GameImpl;
+import frs.hotgammon.framework.Color;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.GameObserver;
 import frs.hotgammon.framework.Location;
@@ -26,24 +29,32 @@ public class DiceRollState implements GameState {
 	@Override
 	public void nextTurn() {
 		
-		game.numberOfMovesMade = 0;
-		game.getRollDeterminer().rollDice(game.turnNumber);
-		game.diceValuesLeft = game.diceThrown().clone();
-
-		if (game.turnNumber == 0) {
-			game.playerInTurn = game.getStartingPlayer();
-
+		
+		if(game.turnNumber!= 0 && game.getPlayerInTurn()==Color.NONE){
+			
+			game.nextTurn();
+			
 		}
-
-		game.getRulesFactory().createTurnDeterminer().nextTurn(game.changePlayer);
-		game.turnNumber++;
-
-		for (int i = 0; i < game.getGameObserversList().size(); i++) {
-			game.getGameObserversList().get(i).diceRolled(game.diceThrown());
+		else{
+			game.numberOfMovesMade = 0;
+			game.getRollDeterminer().rollDice(game.turnNumber);
+			game.diceValuesLeft = game.diceThrown().clone();
+	
+			if (game.turnNumber == 0) {
+				game.playerInTurn = game.getStartingPlayer();
+	
+			}
+	
+			game.getRulesFactory().createTurnDeterminer().nextTurn(game.changePlayer);
+			game.turnNumber++;
+	
+			for (int i = 0; i < game.getGameObserversList().size(); i++) {
+				game.getGameObserversList().get(i).diceRolled(game.diceThrown());
+			}
+			game.setState(new MoveCheckerState(game));
 		}
-		game.setState(new MoveCheckerState(game));
-
 	}
+	
 
 	public String toString() {
 

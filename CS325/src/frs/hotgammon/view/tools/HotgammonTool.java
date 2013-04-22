@@ -1,6 +1,5 @@
 package frs.hotgammon.view.tools;
 
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.view.figures.CheckerFigure;
@@ -42,23 +41,17 @@ public class HotgammonTool extends SelectionTool {
 
 		for (Figure f : editor().drawing().selection()) {
 
-			if (toolMovesItsFigure(f, currentTool) && currentTool !=null && !(currentTool instanceof NullTool)) {
+			if (toolMovesItsFigure(f, currentTool) && currentTool != null
+					&& !(currentTool instanceof NullTool)) {
 				currentTool.mouseUp(e, x, y);
-				
+
 			}
 			super.mouseUp(e, x, y);
-			
-
 		}
-	
-		
 	}
-	
-	
-	 
 
 	public void mouseDown(MouseEvent e, int x, int y) {
-		
+
 		super.mouseDown(e, x, y);
 
 		currentTool = getCurrentTool();
@@ -69,16 +62,14 @@ public class HotgammonTool extends SelectionTool {
 
 				System.out.println("CURRENT TOOL IS" + currentTool);
 				currentTool.mouseDown(e, x, y);
-				
+
 			}
-		
 
 		}
 		if (currentTool instanceof NullTool) {
 			printWarning();
 		}
 
-		
 	}
 
 	private void printWarning() {
@@ -99,15 +90,12 @@ public class HotgammonTool extends SelectionTool {
 	}
 
 	private boolean toolMovesItsFigure(Figure f, Tool t) {
-		
+
 		System.out.println(f);
 
 		boolean toReturn = t.toString().toLowerCase()
 				.indexOf(f.toString().toLowerCase()) != -1 ? true : false;
-		System.out.println(t.toString().toLowerCase());
-		System.out.println(f.toString().toLowerCase());
-		System.out.println("CHECKER MOVES ITS FIGURE " + toReturn);
-		return toReturn && t!=null;
+		return toReturn && t != null;
 
 	}
 

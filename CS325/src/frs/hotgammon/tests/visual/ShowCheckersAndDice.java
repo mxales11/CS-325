@@ -2,6 +2,7 @@ package frs.hotgammon.tests.visual;
 
 import minidraw.standard.*;
 import minidraw.framework.*;
+
 import java.awt.*;
 import javax.swing.*;
 import frs.hotgammon.framework.Color;
@@ -19,6 +20,7 @@ import frs.hotgammon.variants.*;
 import frs.hotgammon.variants.rules.AlphaMon;
 import frs.hotgammon.variants.rules.BetaMon;
 import frs.hotgammon.variants.rules.GammaMon;
+import frs.hotgammon.variants.rules.SemiMon;
 
 /**
  * Show the dice and some checkers on the backgammon board.
@@ -35,11 +37,11 @@ public class ShowCheckersAndDice {
 
 	public static void main(String[] args) {
 
-		Game game = new GameImpl(new AlphaMon());
+		Game game = new GameImpl(new SemiMon());
 		game.newGame();
 
 		DrawingEditor editor = new MiniDrawApplication(
-				"Show HotGammon figures...", new HotGammonFactory());
+				"Show HotGammon figures...", new HotGammonFactory(game));
 		editor.open();
 
 		HotgammonDrawing model = (HotgammonDrawing) editor.drawing();
@@ -56,6 +58,14 @@ public class ShowCheckersAndDice {
 }
 
 class HotGammonFactory implements Factory {
+
+	private Game game;
+
+	public HotGammonFactory(Game game) {
+		this.game = game;
+
+	}
+
 	public DrawingView createDrawingView(DrawingEditor editor) {
 		DrawingView view = new StdViewWithBackground(editor, "board");
 		return view;
@@ -63,7 +73,7 @@ class HotGammonFactory implements Factory {
 
 	public Drawing createDrawing(DrawingEditor editor) {
 
-		return new HotgammonDrawing();
+		return new HotgammonDrawing(editor, game);
 
 	}
 
@@ -72,4 +82,5 @@ class HotGammonFactory implements Factory {
 		statusField.setEditable(false);
 		return statusField;
 	}
+
 }

@@ -20,7 +20,7 @@ public class GameImpl implements Game {
 
 	public Color playerInTurn = Color.NONE;
 	private Board board;
-	
+
 	public int turnNumber = 0;
 	public int[] diceValuesLeft;
 	public int numberOfMovesMade = 0;
@@ -30,7 +30,7 @@ public class GameImpl implements Game {
 	public static final int NUMBER_OF_DICE = 2;
 	public static final int MINIMAL_NUM_OF_MOVES_TO_WIN_GAME = 6;
 	public static final int STANDARD_NUM_OF_MOVES = 2;
-	
+
 	private MoveValidator moveValidator;
 	private TurnDeterminer turnDeterminer;
 	private RollDeterminer rollDeterminer;
@@ -40,17 +40,15 @@ public class GameImpl implements Game {
 	private GameState currentState;
 	private ArrayList<GameObserver> gameObserversList = new ArrayList<GameObserver>();
 
-	
-	public void setState(GameState gameState){
+	public void setState(GameState gameState) {
 		this.currentState = gameState;
 	}
-	
+
 	public int getNumberOfMovesMade() {
 
 		return numberOfMovesMade;
 	}
 
-	
 	public RulesFactory getRulesFactory() {
 		return rulesFactory;
 	}
@@ -125,9 +123,9 @@ public class GameImpl implements Game {
 	}
 
 	public void nextTurn() {
-		
+
 		currentState.nextTurn();
-	
+
 	}
 
 	public Color getStartingPlayer() {
@@ -135,28 +133,35 @@ public class GameImpl implements Game {
 		if ((diceThrown()[0]) != (diceThrown()[1])) {
 			return diceThrown()[0] > diceThrown()[1] ? Color.RED : Color.BLACK;
 		}
-		
+
 		System.out.println("Starting player is null");
 		return Color.NONE;
 
 	}
 
 	public void sendToTheBar(Location from, Location to) {
+		
+		System.out.println("Was sent to the bar!!!!!!!!!!!!!! Invoke checkerMove to redraw");
 		Color player = this.getColor(to);
 		Location bar = player == Color.RED ? Location.R_BAR : Location.B_BAR;
 		this.getBoard().move(to, bar);
+		
+		
+		/**
+		for (int i = 0; i < this.gameObserversList.size(); i++) {
+			this.gameObserversList.get(i).checkerMove(to, bar);
+		}
+		**/
 	}
 
 	public boolean move(Location from, Location to) {
-		
-		
+
 		return currentState.move(from, to);
 
-	
 	}
 
 	public Color getPlayerInTurn() {
-		
+
 		System.out.println("Player in turn is" + playerInTurn);
 		return playerInTurn;
 	}
@@ -171,7 +176,6 @@ public class GameImpl implements Game {
 		diceValuesLeft[1] = secondDie;
 	}
 
-	
 	public boolean diceThrownAre12Or21() {
 
 		int[] diceThrown = diceThrown();
@@ -344,17 +348,19 @@ public class GameImpl implements Game {
 	public void setCurrentState(GameStateImpl gameState) {
 		this.currentState = gameState;
 	}
-	
+
 	public int getNumberOfMovesLeft() {
-		
+
 		int movesLeft = moveValidator.getNumberOfMovesLeft();
 		System.out.println(movesLeft);
 		return movesLeft;
 	}
-	
+
 	public ArrayList<GameObserver> getGameObserversList() {
-		
+
 		return gameObserversList;
 	}
+
+	
 
 }

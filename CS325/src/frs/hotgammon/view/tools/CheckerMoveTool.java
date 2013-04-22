@@ -4,9 +4,11 @@ import frs.hotgammon.view.*;
 import frs.hotgammon.view.figures.CheckerFigure;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.Location;
+import minidraw.customized.helpers.Coordinates;
 import minidraw.framework.DrawingEditor;
 import minidraw.framework.Figure;
 import minidraw.standard.AbstractTool;
@@ -15,7 +17,7 @@ public class CheckerMoveTool extends AbstractTool {
 
 	private Game game;
 	private Location lastFromLocation = Location.R1;
-	private Point pointFrom = new Point(0,0);
+	private Point pointFrom = new Point(0, 0);
 	private Point pointTo = new Point(0, 0);
 
 	public CheckerMoveTool(DrawingEditor editor, Game game) {
@@ -51,18 +53,13 @@ public class CheckerMoveTool extends AbstractTool {
 		Location from = Convert.xy2Location(x, y);
 		lastFromLocation = from;
 		pointFrom = new Point(x, y);
-		
+	}
 
-}
-
+	
+	
 	private void moveBackToOriginalPosition() {
 
-		System.out
-				.println("Dragged figure "
-						+ Convert.xy2Location((int) pointFrom.getX(),
-								(int) pointTo.getX()) + "to " 
-						+ Convert.xy2Location((int) pointFrom.getY(), (int) pointTo.getY()));
-
+		
 		for (Figure f : editor().drawing().selection()) {
 
 			int xToMove = (int) (pointFrom.getX() - pointTo.getX());
@@ -79,9 +76,8 @@ public class CheckerMoveTool extends AbstractTool {
 	}
 
 	private boolean playerMovesHisChecker(Figure f) {
-	
-		return ((CheckerFigure) f).getColor() == game
-				.getPlayerInTurn();
+
+		return ((CheckerFigure) f).getColor() == game.getPlayerInTurn();
 
 	}
 
