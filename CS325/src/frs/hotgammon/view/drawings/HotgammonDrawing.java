@@ -38,7 +38,7 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 
 	}
 
-	// read it from model instead of initializing here
+	// better initialize in model
 	private void initializeCheckers() {
 
 		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
@@ -114,13 +114,10 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 		}
 
 		if (figure.toString().equals("dice")) {
-
 			diceList.add((DieFigure) figure);
 		}
-
 		System.out.println("ADD WAS INVOKED");
 		return super.add(figure);
-
 	}
 
 	public Figure remove(Figure figure) {
@@ -216,10 +213,11 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 	private void moveToTheBar(CheckerFigure checkerAtTargetedSpot) {
 		
 		Color barCheckerColor = checkerAtTargetedSpot.getColor();
-		
-		//change 0 to how many checkers is already there
+		Location barToGoTo = getCorrectBar(barCheckerColor);
+		int numberOfOccupantsInTheBar = game.getBoard().get(barToGoTo.ordinal()).occupants;
+
 		CheckerFigure checkerToGoToTheBar = new CheckerFigure(barCheckerColor, Convert.locationAndCount2xy(
-				getCorrectBar(barCheckerColor), 0));
+				barToGoTo, numberOfOccupantsInTheBar));
 				this.add(checkerToGoToTheBar);
 		
 	}
