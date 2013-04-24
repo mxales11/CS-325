@@ -26,6 +26,8 @@ public class CompleteMoveValidator implements MoveValidator {
 	}
 	
 	
+	
+	
 
 	public boolean coreValidMove(Location from) {
 		return thereIsNoWinner() && playerMovesHisChecker(from);
@@ -92,12 +94,11 @@ public class CompleteMoveValidator implements MoveValidator {
 		return coreValidMove(from)
 				&& (checkerIsMovedToEmptyLocation(to)
 						|| checkerIsPlacedOnTheSameColor(to) || checkerIsMovedToLocationWithOneOpponent(to))
-				&& playerMovesCheckerInLegalDirection(from, to)
+				&& (playerMovesCheckerInLegalDirection(from, to) )
 				&& ((distanceTravelledEqualsTheValueOfDieRolled(from, to)) || (attemptsToBearOff(to)
 						&& currentPlayerHasAllCheckersOnInnerTable() && noCheckerOnInnerTableFartherAwayThanDieValue(from)))
 				&& (!attemptsToMoveToTheBar(to))
-				&& (!currentPlayerIsInTheBar() || (movesToOpponentsInnerTable(to))
-						&& !(checkerIsMovedToLocationWithOneOpponent(to)))
+				&& (!currentPlayerIsInTheBar() || (movesToOpponentsInnerTableFromBar(from, to)))
 				&& ((!attemptsToBearOff(to)) || (currentPlayerHasAllCheckersOnInnerTable()))
 
 		;
@@ -127,22 +128,22 @@ public class CompleteMoveValidator implements MoveValidator {
 		return blackCheckerIsInTheBar() || redCheckerIsInTheBar();
 	}
 
-	private boolean blackMovesToOpponentsInnerTable(Location to) {
+	private boolean blackMovesToOpponentsInnerTable(Location from, Location to) {
 
 		return game.getPlayerInTurn() == Color.BLACK
-				&& BoardImpl.redInnerTable.contains(to);
+				&& BoardImpl.redInnerTable.contains(to) && from == Location.B_BAR;
 	}
 
-	private boolean redMovesToOpponetsInnerTable(Location to) {
+	private boolean redMovesToOpponetsInnerTable(Location from, Location to) {
 
 		return game.getPlayerInTurn() == Color.RED
-				&& BoardImpl.blackInnerTable.contains(to);
+				&& BoardImpl.blackInnerTable.contains(to) && from == Location.R_BAR;
 	}
 
-	private boolean movesToOpponentsInnerTable(Location to) {
+	private boolean movesToOpponentsInnerTableFromBar(Location from, Location to) {
 
-		return blackMovesToOpponentsInnerTable(to)
-				|| redMovesToOpponetsInnerTable(to);
+		return blackMovesToOpponentsInnerTable(from, to)
+				|| redMovesToOpponetsInnerTable(from, to);
 	}
 
 	private ArrayList<Integer> indexesOfInnerTable(

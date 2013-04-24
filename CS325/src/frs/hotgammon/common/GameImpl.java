@@ -155,10 +155,7 @@ public class GameImpl implements Game {
 		Location bar = player == Color.RED ? Location.R_BAR : Location.B_BAR;
 		this.getBoard().move(to, bar);
 
-		/**
-		 * for (int i = 0; i < this.gameObserversList.size(); i++) {
-		 * this.gameObserversList.get(i).checkerMove(to, bar); }
-		 **/
+		
 	}
 
 	public boolean move(Location from, Location to) {

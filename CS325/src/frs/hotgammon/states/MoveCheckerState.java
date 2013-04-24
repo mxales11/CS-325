@@ -25,6 +25,7 @@ public class MoveCheckerState implements GameState {
 		}
 
 		if (game.getRulesFactory().createMoveValidator().isValid(from, to)) {
+			
 			game.currentDistanceTravelled = Math.abs(Location
 					.distance(from, to));
 

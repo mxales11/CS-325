@@ -208,12 +208,6 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 					moveToTheBar(checkerAtTargetedSpot);
 					
 				}
-				
-
-				else {
-					System.out
-							.println("Something FAILED");
-				}
 
 			}
 		}
