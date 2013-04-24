@@ -6,6 +6,8 @@ import frs.hotgammon.view.figures.CheckerFigure;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+
+import frs.hotgammon.common.GameImpl;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.Location;
 import minidraw.customized.helpers.Coordinates;
@@ -15,12 +17,12 @@ import minidraw.standard.AbstractTool;
 
 public class CheckerMoveTool extends AbstractTool {
 
-	private Game game;
+	private GameImpl game;
 	private Location lastFromLocation = Location.R1;
 	private Point pointFrom = new Point(0, 0);
 	private Point pointTo = new Point(0, 0);
 
-	public CheckerMoveTool(DrawingEditor editor, Game game) {
+	public CheckerMoveTool(DrawingEditor editor, GameImpl game) {
 		super(editor);
 		this.game = game;
 
@@ -36,9 +38,19 @@ public class CheckerMoveTool extends AbstractTool {
 			if (playerMovesHisChecker(f)) {
 				if (!(game.move(lastFromLocation, to))) {
 
-					System.out.println("The move from " + lastFromLocation
-							+ " to " + to + " is illegal");
+					for (int i = 0; i < game.getGameObserversList().size(); i++) {
+						game.getGameObserversList().get(i).changeStatusField("The move from " + lastFromLocation
+								+ " to " + to + " is illegal");
+					}
+
 					moveBackToOriginalPosition();
+				}
+			}
+			
+			else {
+				
+				for (int i = 0; i < game.getGameObserversList().size(); i++) {
+					game.getGameObserversList().get(i).changeStatusField("It is " + game.getPlayerInTurn() + " turn. You cannot move");
 				}
 			}
 

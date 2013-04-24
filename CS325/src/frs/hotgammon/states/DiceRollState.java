@@ -22,7 +22,10 @@ public class DiceRollState implements GameState {
 
 	@Override
 	public boolean move(Location from, Location to) {
-		System.out.println("You cannot move now. You have 0 moves left");
+		
+		for (int i = 0; i < game.getGameObserversList().size(); i++) {
+			game.getGameObserversList().get(i).changeStatusField("You cannot move now. You have 0 moves left. It is " + game.getPlayerInTurn() + " turn");
+		}
 		return false;
 	}
 
@@ -49,6 +52,16 @@ public class DiceRollState implements GameState {
 			
 			if(game.playerInTurn!=Color.NONE){
 				game.setState(new MoveCheckerState(game));
+				for (int i = 0; i < game.getGameObserversList().size(); i++) {
+					game.getGameObserversList().get(i).changeStatusField("Dice thrown are [" + game.diceThrown()[0] +"," + game.diceThrown()[1] + "]." + " It is " + game.getPlayerInTurn() + " turn.");
+				}
+			}
+			
+			else {
+				for (int i = 0; i < game.getGameObserversList().size(); i++) {
+					game.getGameObserversList().get(i).changeStatusField("Throw dice again to determine who starts the game.");
+				}
+
 			}
 			
 			

@@ -23,9 +23,6 @@ public class AlphaMonTests {
 	public void setUp() {
 		game = new GameImpl(new AlphaMon());
 		game.newGame();
-		System.out.println("Distance between locations from red bar is " + Location.distance(Location.R_BAR, Location.B2));
-		System.out.println("Distance between locations from red bar to B4 is " + Location.distance(Location.R_BAR, Location.B4));
-		System.out.println("Distance between locations from black bar is " + Location.distance(Location.B_BAR, Location.R2));
 	}
 
 	@Test

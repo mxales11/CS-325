@@ -37,13 +37,13 @@ public class ShowCheckersAndDice {
 
 	public static void main(String[] args) {
 
-		Game game = new GameImpl(new SemiMon());
+		GameImpl game = new GameImpl(new SemiMon());
 		game.newGame();
-
+		
 		DrawingEditor editor = new MiniDrawApplication(
 				"Show HotGammon figures...", new HotGammonFactory(game));
+		
 		editor.open();
-
 		HotgammonDrawing model = (HotgammonDrawing) editor.drawing();
 		game.addObserver(model);
 
@@ -60,6 +60,8 @@ public class ShowCheckersAndDice {
 class HotGammonFactory implements Factory {
 
 	private Game game;
+	private JTextField statusField =  new JTextField("Throw dice to start the game");
+	
 
 	public HotGammonFactory(Game game) {
 		this.game = game;
@@ -71,16 +73,18 @@ class HotGammonFactory implements Factory {
 		return view;
 	}
 
-	public Drawing createDrawing(DrawingEditor editor) {
-
-		return new HotgammonDrawing(editor, game);
-
-	}
-
+	
 	public JTextField createStatusField(DrawingEditor editor) {
-		JTextField statusField = new JTextField("Hello HotGammon...");
+	
 		statusField.setEditable(false);
 		return statusField;
+	}
+	
+	public Drawing createDrawing(DrawingEditor editor) {
+
+		System.out.println("Status field is " + statusField );
+		return new HotgammonDrawing(editor, game, statusField);
+
 	}
 
 }

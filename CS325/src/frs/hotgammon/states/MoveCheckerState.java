@@ -22,10 +22,11 @@ public class MoveCheckerState implements GameState {
 
 		if (game.diceThrownEqual()) {
 			game.movesDoubled = true;
+
 		}
 
 		if (game.getRulesFactory().createMoveValidator().isValid(from, to)) {
-			
+
 			game.currentDistanceTravelled = Math.abs(Location
 					.distance(from, to));
 
@@ -44,8 +45,11 @@ public class MoveCheckerState implements GameState {
 
 			if (noMovesLeft()) {
 
-				System.out.println("NUMBER OF MOVES LEFT IS "
-						+ game.getNumberOfMovesLeft());
+				for (int i = 0; i < game.getGameObserversList().size(); i++) {
+					game.getGameObserversList().get(i)
+							.changeStatusField("Roll dice to move!");
+				}
+
 				game.setState(new DiceRollState(game));
 			}
 
@@ -58,6 +62,9 @@ public class MoveCheckerState implements GameState {
 				game.diceValuesLeft = new int[2];
 				game.diceValuesLeft[0] = game.diceThrown()[0];
 				game.diceValuesLeft[1] = game.diceThrown()[1];
+
+				
+
 			}
 
 			for (int i = 0; i < game.getGameObserversList().size(); i++) {
@@ -78,6 +85,15 @@ public class MoveCheckerState implements GameState {
 	@Override
 	public void nextTurn() {
 		System.out.println("You have moves left, you cannot perform nextTurn");
+
+		for (int i = 0; i < game.getGameObserversList().size(); i++) {
+			game.getGameObserversList()
+					.get(i)
+					.changeStatusField(
+							"You cannot throw dice now. "
+									+ game.getPlayerInTurn() + " has "
+									+ game.getNumberOfMovesLeft());
+		}
 
 	}
 

@@ -127,6 +127,10 @@ public class GameImpl implements Game {
 		} else {
 			playerInTurn = Color.NONE;
 		}
+		for (int i = 0; i < getGameObserversList().size(); i++) {
+			gameObserversList.get(i).changeStatusField("Player in turn is "+ getPlayerInTurn());
+		}
+
 		
 	}
 
@@ -357,5 +361,7 @@ public class GameImpl implements Game {
 
 		return gameObserversList;
 	}
+	
+	
 
 }

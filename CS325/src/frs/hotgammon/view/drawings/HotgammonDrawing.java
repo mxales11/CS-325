@@ -6,6 +6,9 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Set;
+
+import javax.swing.JTextField;
+
 import minidraw.customized.helpers.Coordinates;
 import minidraw.framework.DrawingEditor;
 import minidraw.framework.Figure;
@@ -13,6 +16,7 @@ import minidraw.framework.FigureChangeEvent;
 import minidraw.framework.Figure.*;
 import minidraw.standard.ImageFigure;
 import minidraw.standard.StandardDrawing;
+import frs.hotgammon.common.GameImpl;
 import frs.hotgammon.framework.Color;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.GameObserver;
@@ -27,85 +31,19 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 
 	private ArrayList<CheckerFigure> checkerList = new ArrayList<CheckerFigure>();
 	private ArrayList<DieFigure> diceList = new ArrayList<DieFigure>();
-	private Game game;
+	private GameImpl game;
 	private DrawingEditor editor;
+	private JTextField statusEditor;
 
-	public HotgammonDrawing(DrawingEditor editor, Game game) {
-
+	public HotgammonDrawing(DrawingEditor editor, Game game, JTextField statusEditor) {
+		
 		this.editor = editor;
-		this.game = game;
+		this.game = (GameImpl)game;
+		this.statusEditor = statusEditor;
 		initializeCheckers();
-
 	}
 
-	// better initialize in model
-	private void initializeCheckers() {
-
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.R1, 0)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.R1, 1)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.R6, 0)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.R6, 1)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.R6, 2)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.R6, 3)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.R6, 4)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.R8, 0)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.R8, 1)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.R8, 2)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.R12, 0)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.R12, 1)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.R12, 2)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.R12, 3)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.R12, 4)));
-
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.B1, 0)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.B1, 1)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.B6, 0)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.B6, 1)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.B6, 2)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.B6, 3)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.B6, 4)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.B8, 0)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.B8, 1)));
-		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
-				Location.B8, 2)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.B12, 0)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.B12, 1)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.B12, 2)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.B12, 3)));
-		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
-				Location.B12, 4)));
-
-		System.out.println("Checker list is " + checkerList.size());
-
-	}
+	
 
 	public Figure add(Figure figure) {
 
@@ -116,23 +54,19 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 		if (figure.toString().equals("dice")) {
 			diceList.add((DieFigure) figure);
 		}
-		System.out.println("ADD WAS INVOKED");
 		return super.add(figure);
 	}
 
 	public Figure remove(Figure figure) {
 
 		if (figure instanceof CheckerFigure) {
-
 			checkerList.remove((CheckerFigure) figure);
 		}
 
 		if (figure instanceof DieFigure) {
-			System.out.println("Instance of die figure");
 			diceList.remove((DieFigure) figure);
 		}
 
-		System.out.println("REMOVE WAS INVOKED");
 		return super.remove(figure);
 
 	}
@@ -165,7 +99,6 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 		for (int i = 0; i < checkerList.size(); i++) {
 
 			if (checkerList.get(i).atTheSameSpot(checkerFigure)) {
-
 				return checkerList.get(i);
 			}
 		}
@@ -178,12 +111,15 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 	public void checkerMove(Location from, Location to) {
 
 		CheckerFigure foundFigure;
-		System.out.println("CHECKER MOVE METHOD WAS INVOKED");
-
+		
 		for (Figure f : editor.drawing().selection()) {
 			foundFigure = (CheckerFigure) f;
 
 			if (foundFigure != null) {
+				
+				for (int i = 0; i < game.getGameObserversList().size(); i++) {
+					game.getGameObserversList().get(i).changeStatusField(game.getPlayerInTurn() + " has " + game.getNumberOfMovesLeft() + " moves left."); 
+				}
 
 				this.remove(foundFigure);
 
@@ -241,7 +177,6 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 		System.out.println("Dice values lenght is 2");
 		if (values != null && values.length == 2) {
 
-			System.out.println("DICE ROLLED METHOD WAS INVOKED");
 
 			for (int i = 0; i < values.length; i++) {
 
@@ -259,9 +194,83 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 			this.figureChanged(new FigureChangeEvent(redDie));
 			this.figureChanged(new FigureChangeEvent(blackDie));
 			this.changed();
-			System.out.println("DICE ROLLED METHOD WAS INVOKED");
+			for (int i = 0; i < game.getGameObserversList().size(); i++) {
+				game.getGameObserversList().get(i).changeStatusField("It is " + game.getPlayerInTurn() +"'s"+ " turn");
+			}
+			
 		}
 
 	}
+
+	@Override
+	public void changeStatusField(String info) {
+		statusEditor.setText(info);	
+	}
+	
+	// better initialize in model
+		private void initializeCheckers() {
+
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.R1, 0)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.R1, 1)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.R6, 0)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.R6, 1)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.R6, 2)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.R6, 3)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.R6, 4)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.R8, 0)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.R8, 1)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.R8, 2)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.R12, 0)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.R12, 1)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.R12, 2)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.R12, 3)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.R12, 4)));
+
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.B1, 0)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.B1, 1)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.B6, 0)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.B6, 1)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.B6, 2)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.B6, 3)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.B6, 4)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.B8, 0)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.B8, 1)));
+			this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
+					Location.B8, 2)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.B12, 0)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.B12, 1)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.B12, 2)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.B12, 3)));
+			this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
+					Location.B12, 4)));
+		}
 
 }

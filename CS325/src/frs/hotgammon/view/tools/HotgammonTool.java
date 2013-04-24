@@ -1,6 +1,8 @@
 package frs.hotgammon.view.tools;
 
 import java.awt.event.MouseEvent;
+
+import frs.hotgammon.common.GameImpl;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.view.figures.CheckerFigure;
 import minidraw.framework.DrawingEditor;
@@ -14,9 +16,9 @@ public class HotgammonTool extends SelectionTool {
 	private Tool checkerMoveTool;
 	private Tool diceRollTool;
 	private Tool currentTool;
-	private Game game;
+	private GameImpl game;
 
-	public HotgammonTool(DrawingEditor editor, Game game) {
+	public HotgammonTool(DrawingEditor editor, GameImpl game) {
 		super(editor);
 
 		this.game = game;
@@ -76,8 +78,10 @@ public class HotgammonTool extends SelectionTool {
 
 	private void printWarning() {
 
-		System.out
-				.println("Game has not started yet or game has already finish. Start a new Game!!!");
+		for (int i = 0; i < game.getGameObserversList().size(); i++) {
+			game.getGameObserversList().get(i)
+					.changeStatusField("Game has already finished!");
+		}
 	}
 
 	private Tool getCurrentTool() {
