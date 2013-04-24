@@ -163,17 +163,17 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 
 	}
 
-	public boolean alreadyHasCheckerInThisLocation(CheckerFigure checkerFigure) {
+	private CheckerFigure checkerAtTargetedSpot(CheckerFigure checkerFigure) {
 
 		for (int i = 0; i < checkerList.size(); i++) {
 
-			if (checkerList.get(i).equal(checkerFigure)) {
+			if (checkerList.get(i).atTheSameSpot(checkerFigure)) {
 
-				return true;
+				return checkerList.get(i);
 			}
 		}
 
-		return false;
+		return null;
 
 	}
 
@@ -195,24 +195,47 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 				CheckerFigure newChecker = this.createNewCheckerFigure(
 						locationToDrawTo, foundFigure.getColor());
 
-				if (!alreadyHasCheckerInThisLocation(newChecker)) {
+				CheckerFigure checkerAtTargetedSpot = checkerAtTargetedSpot(newChecker);
+				
+				if (checkerAtTargetedSpot == null) {
 					this.add(newChecker);
+				} 
+				
+				else if (checkerAtTargetedSpot.getColor() != newChecker
+						.getColor()) {
+					this.remove(checkerAtTargetedSpot);
+					this.add(newChecker);
+					moveToTheBar(checkerAtTargetedSpot);
+					
 				}
+				
 
-				if (to == Location.R_BAR || to == Location.B_BAR) {
-					// redraw to bar
+				else {
+					System.out
+							.println("Something FAILED");
 				}
 
 			}
-
-			else {
-				System.out
-						.println("FOUND FIGURE IS NULL, MUST BE INITIALIZATION");
-			}
-
 		}
 	}
 
+	private void moveToTheBar(CheckerFigure checkerAtTargetedSpot) {
+		
+		Color barCheckerColor = checkerAtTargetedSpot.getColor();
+		
+		//change 0 to how many checkers is already there
+		CheckerFigure checkerToGoToTheBar = new CheckerFigure(barCheckerColor, Convert.locationAndCount2xy(
+				getCorrectBar(barCheckerColor), 0));
+				this.add(checkerToGoToTheBar);
+		
+	}
+	
+	private Location getCorrectBar(Color color) {
+		
+		return (color==Color.RED)?Location.R_BAR:Location.B_BAR;
+			
+	}
+	
 	private Coordinates getFigureCenter(double x, double y, double width,
 			double height) {
 

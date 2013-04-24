@@ -15,12 +15,17 @@ public class CheckerFigure extends ImageFigure {
 	}
 	
 	
-	public boolean equal(CheckerFigure checkerFigure) {
-		
-	
-		return this.point.getX()==checkerFigure.point.getX() && this.point.getY()==checkerFigure.point.getY();
-					
+	public boolean equals(CheckerFigure checkerFigure) {
+		System.out.println("Correct equals was invoked");
+		return this.color==checkerFigure.color;
 	}
+	
+	public boolean atTheSameSpot(CheckerFigure checkerFigure){
+		
+		return this.point.getX()==checkerFigure.point.getX() && this.point.getY()==checkerFigure.point.getY();
+	}
+	
+	
 	
 	public Color getColor() {
 		return color;
