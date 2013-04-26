@@ -174,12 +174,9 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 	@Override
 	public void diceRolled(int[] values) {
 
-		System.out.println("Dice values lenght is 2");
 		if (values != null && values.length == 2) {
 
-
 			for (int i = 0; i < values.length; i++) {
-
 				this.remove(diceList.get(0));
 			}
 			DieFigure redDie = new DieFigure("die" + String.valueOf(values[0]),

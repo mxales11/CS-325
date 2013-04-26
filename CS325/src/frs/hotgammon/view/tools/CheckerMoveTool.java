@@ -60,7 +60,7 @@ public class CheckerMoveTool extends AbstractTool {
 	}
 
 	public void mouseDown(MouseEvent e, int x, int y) {
-
+		
 		super.mouseDown(e, x, y);
 		Location from = Convert.xy2Location(x, y);
 		lastFromLocation = from;
@@ -73,12 +73,9 @@ public class CheckerMoveTool extends AbstractTool {
 
 		
 		for (Figure f : editor().drawing().selection()) {
-
 			int xToMove = (int) (pointFrom.getX() - pointTo.getX());
 			int yToMove = (int) (pointFrom.getY() - pointTo.getY());
-
 			f.moveBy(xToMove, yToMove);
-
 		}
 
 	}
@@ -88,9 +85,7 @@ public class CheckerMoveTool extends AbstractTool {
 	}
 
 	private boolean playerMovesHisChecker(Figure f) {
-
 		return ((CheckerFigure) f).getColor() == game.getPlayerInTurn();
-
 	}
 
 }

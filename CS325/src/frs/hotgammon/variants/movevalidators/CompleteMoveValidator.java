@@ -10,11 +10,13 @@ import frs.hotgammon.common.GameImpl;
 import frs.hotgammon.framework.Color;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.Location;
+import frs.hotgammon.states.DiceRollState;
 
 public class CompleteMoveValidator implements MoveValidator {
 
 	private GameImpl game;
 	private static final int DOUBLE = 2;
+	private boolean isPotentialMove = false;
 
 	public CompleteMoveValidator() {
 
@@ -93,9 +95,13 @@ public class CompleteMoveValidator implements MoveValidator {
 						from, to)))
 				&& ((!attemptsToBearOff(to)) || (currentPlayerHasAllCheckersOnInnerTable()));
 
-		if (!valid) {
-			if (noMovePossible(from)) {
-				game.setSkipTurn(true);
+		if (!valid && !isPotentialMove) {
+			if (noMovePossible()) {
+				game.setState(new DiceRollState(game));
+				System.out.println("Your turn was skipped");
+				for (int i = 0; i < game.getGameObserversList().size(); i++) {
+					game.getGameObserversList().get(i).changeStatusField("No moves legal! Your turn was skipped. Player in turn is " + game.getPlayerInTurn());
+				}
 			}
 		}
 
@@ -243,45 +249,62 @@ public class CompleteMoveValidator implements MoveValidator {
 				- game.getNumberOfMovesMade();
 	}
 
-	private ArrayList<Integer> getLocationNumbers(Location from) {
+	public ArrayList<Location> getPotentialFromLocations() {
 
-		ArrayList<Integer> locationNumbers = new ArrayList<Integer>();
-		for (int i = 0; i < game.diceValuesLeft.length; i++) {
-			locationNumbers.add(from.ordinal() + game.diceValuesLeft[i]);
-			locationNumbers.add(from.ordinal() - game.diceValuesLeft[i]);
-		}
-		return locationNumbers;
-	}
+		ArrayList<Location> potentialFromLocations = new ArrayList();
 
-	public boolean noMovePossible(Location from) {
-
-		ArrayList<Location> potentialLocations = getPotentialLocations(from,
-				getLocationNumbers(from));
-
-		for (int i = 0; i < potentialLocations.size(); i++) {
-			if (isValid(from, potentialLocations.get(i))) {
-				return false;
+		for (Location loc : Location.values()) {
+			if (game.getBoard().get(loc.ordinal()).color == game
+					.getPlayerInTurn()) {
+				potentialFromLocations.add(loc);
 			}
 		}
-		
-		System.out.println("NO MOVES ARE POSSIBLE");
+		return potentialFromLocations;
+
+	}
+
+	private boolean noMovePossible() {
+
+		ArrayList<Location> potentialToLocations;
+		ArrayList<Location> potentialFromLocations = getPotentialFromLocations();
+
+		isPotentialMove = true;
+
+		for (int k = 0; k < potentialFromLocations.size(); k++) {
+			potentialToLocations = getPotentialToLocations();
+
+			for (int i = 0; i < potentialToLocations.size(); i++) {
+				if (isValid(potentialFromLocations.get(k),
+						potentialToLocations.get(i))) {
+					isPotentialMove = false;
+					return false;
+				}
+			}
+		}
+
+		isPotentialMove = false;
+		printPotentialLocations(potentialFromLocations);
+		System.out.println("N0 MOVE POSSIBLE!!");
 		return true;
 	}
 
-	public ArrayList<Location> getPotentialLocations(Location location,
-			ArrayList<Integer> locationNumbers) {
+	public ArrayList<Location> getPotentialToLocations() {
 
-		ArrayList<Location> potentialLocations = new ArrayList();
+		ArrayList<Location> potentialToLocations = new ArrayList<Location>();
 
-		for (int i = 0; i < locationNumbers.size(); i++) {
-			try {
-				Location potentialLocation = Location.valueOf("R"
-						+ locationNumbers.get(i));
-				potentialLocations.add(potentialLocation);
-			} catch (IndexOutOfBoundsException e) {
-				System.out.println("EXCEPTION WAS THROWN!!!!!!!!!!!!!!!!!!!!!");
-			}
+		for (Location loc : Location.values()) {
+			potentialToLocations.add(loc);
 		}
-		return potentialLocations;
+
+		return potentialToLocations;
+
 	}
+
+	private void printPotentialLocations(ArrayList<Location> potentialLocations) {
+		System.out.println("Potential locations are: ");
+		for (int i = 0; i < potentialLocations.size(); i++) {
+			System.out.println(potentialLocations.get(i));
+		}
+	}
+
 }

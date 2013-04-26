@@ -8,8 +8,6 @@ public class DieFigure extends ImageFigure {
 
 	public DieFigure(String string, Point point) {
 		super(string, point);
-		System.out.println("Die was created");
-
 	}
 	
 	public String toString() {	

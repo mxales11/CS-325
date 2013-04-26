@@ -86,8 +86,7 @@ public class MoveCheckerState implements GameState {
 
 	@Override
 	public void nextTurn() {
-		System.out.println("You have moves left, you cannot perform nextTurn");
-
+		
 		for (int i = 0; i < game.getGameObserversList().size(); i++) {
 			game.getGameObserversList()
 					.get(i)

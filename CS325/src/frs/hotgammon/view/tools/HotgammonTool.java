@@ -57,16 +57,13 @@ public class HotgammonTool extends SelectionTool {
 	public void mouseDown(MouseEvent e, int x, int y) {
 
 		super.mouseDown(e, x, y);
-
 		currentTool = getCurrentTool();
 
 		for (Figure f : editor().drawing().selection()) {
 
 			if (toolMovesItsFigure(f, currentTool)) {
-
 				System.out.println("CURRENT TOOL IS" + currentTool);
 				currentTool.mouseDown(e, x, y);
-
 			}
 
 		}

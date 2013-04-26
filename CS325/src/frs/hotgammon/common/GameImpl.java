@@ -56,7 +56,6 @@ public class GameImpl implements Game {
 	}
 
 	public GameImpl(RulesFactory rulesFactory) {
-
 		setUpRules(rulesFactory);
 	}
 
@@ -120,13 +119,12 @@ public class GameImpl implements Game {
 	public void changePlayer() {
 
 		if (getPlayerInTurn() == Color.BLACK) {
-
 			playerInTurn = Color.RED;
 
 		} else if (getPlayerInTurn() == Color.RED) {
-
 			playerInTurn = Color.BLACK;
-		} else {
+		}
+		else {
 			playerInTurn = Color.NONE;
 		}
 		for (int i = 0; i < getGameObserversList().size(); i++) {
@@ -137,9 +135,7 @@ public class GameImpl implements Game {
 	}
 
 	public void nextTurn() {
-
 		currentState.nextTurn();
-
 	}
 
 	public Color getStartingPlayer() {
@@ -171,8 +167,6 @@ public class GameImpl implements Game {
 	}
 
 	public Color getPlayerInTurn() {
-
-		System.out.println("Player in turn is" + playerInTurn);
 		return playerInTurn;
 	}
 
@@ -197,16 +191,6 @@ public class GameImpl implements Game {
 	public int[] diceThrown() {
 
 		int[] diceThrown = rollDeterminer.diceThrown();
-
-		if (diceThrown != null) {
-			System.out.println("Dice thrown are " + diceThrown[0] + " and "
-					+ diceThrown[1]);
-		}
-
-		else {
-			System.out.println("DICE THROWN ARE NULL");
-		}
-
 		return diceThrown;
 	}
 
@@ -325,12 +309,10 @@ public class GameImpl implements Game {
 	}
 
 	public RollDeterminer getRollDeterminer() {
-
 		return rollDeterminer;
 	}
 
 	public void setChangePlayer(boolean changePlayer) {
-
 		this.changePlayer = changePlayer;
 	}
 
@@ -355,17 +337,14 @@ public class GameImpl implements Game {
 	public int getNumberOfMovesLeft() {
 
 		int movesLeft = moveValidator.getNumberOfMovesLeft();
-		System.out.println(movesLeft);
 		return movesLeft;
 	}
 
 	public ArrayList<GameObserver> getGameObserversList() {
-
 		return gameObserversList;
 	}
 	
 	public boolean getSkipTurn(){
-		
 		return skipTurn;
 	}
 
