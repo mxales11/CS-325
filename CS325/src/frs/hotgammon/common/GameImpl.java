@@ -30,12 +30,14 @@ public class GameImpl implements Game {
 	public static final int NUMBER_OF_DICE = 2;
 	public static final int MINIMAL_NUM_OF_MOVES_TO_WIN_GAME = 6;
 	public static final int STANDARD_NUM_OF_MOVES = 2;
+	private boolean skipTurn = false;
 
 	private MoveValidator moveValidator;
 	private TurnDeterminer turnDeterminer;
 	private RollDeterminer rollDeterminer;
 	private WinnerDeterminer winnerDeterminer;
 	private RulesFactory rulesFactory;
+	
 
 	private GameState currentState;
 	private ArrayList<GameObserver> gameObserversList = new ArrayList<GameObserver>();
@@ -362,6 +364,14 @@ public class GameImpl implements Game {
 		return gameObserversList;
 	}
 	
+	public boolean getSkipTurn(){
+		
+		return skipTurn;
+	}
+
+	public void setSkipTurn(boolean skipTurn) {
+		this.skipTurn = skipTurn;
+	}
 	
 
 }

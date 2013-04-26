@@ -12,6 +12,7 @@ import frs.hotgammon.common.*;
 public class MoveCheckerState implements GameState {
 
 	private GameImpl game;
+	
 
 	public MoveCheckerState(Game game) {
 		this.game = ((GameImpl) game);
@@ -43,7 +44,7 @@ public class MoveCheckerState implements GameState {
 			game.updateDiceValuesLeft();
 			game.numberOfMovesMade++;
 
-			if (noMovesLeft()) {
+			if (noMovesLeft() || game.getSkipTurn()) {
 
 				for (int i = 0; i < game.getGameObserversList().size(); i++) {
 					game.getGameObserversList().get(i)
@@ -51,6 +52,7 @@ public class MoveCheckerState implements GameState {
 				}
 
 				game.setState(new DiceRollState(game));
+				game.setSkipTurn(false);
 			}
 
 			for (int i = 0; i < game.getGameObserversList().size(); i++) {

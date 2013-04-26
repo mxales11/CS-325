@@ -13,21 +13,16 @@ import frs.hotgammon.framework.Location;
 
 public class CompleteMoveValidator implements MoveValidator {
 
-	private Game game;
+	private GameImpl game;
 	private static final int DOUBLE = 2;
-	
 
 	public CompleteMoveValidator() {
 
 	}
 
 	public void setGame(Game game) {
-		this.game = game;
+		this.game = (GameImpl) game;
 	}
-	
-	
-	
-	
 
 	public boolean coreValidMove(Location from) {
 		return thereIsNoWinner() && playerMovesHisChecker(from);
@@ -36,19 +31,15 @@ public class CompleteMoveValidator implements MoveValidator {
 	private boolean playerMovesHisChecker(Location from) {
 		return game.getPlayerInTurn() == game.getColor(from);
 	}
-	
-	private boolean thereIsNoWinner(){
-		return game.winner()==Color.NONE;
+
+	private boolean thereIsNoWinner() {
+		return game.winner() == Color.NONE;
 	}
 
-	
 	private boolean checkerIsMovedToEmptyLocation(Location to) {
 		return (game.getColor(to) == Color.NONE);
 	}
-	
-	
-	
-	
+
 	private boolean checkerIsPlacedOnTheSameColor(Location to) {
 		return (game.getColor(to) == game.getPlayerInTurn());
 	}
@@ -84,24 +75,31 @@ public class CompleteMoveValidator implements MoveValidator {
 		return false;
 
 	}
-	
+
 	public boolean movesDoubled() {
-		return ((GameImpl)game).getMovesDoubled();
+		return ((GameImpl) game).getMovesDoubled();
 	}
 
 	@Override
 	public boolean isValid(Location from, Location to) {
-		return coreValidMove(from)
+		boolean valid = coreValidMove(from)
 				&& (checkerIsMovedToEmptyLocation(to)
 						|| checkerIsPlacedOnTheSameColor(to) || checkerIsMovedToLocationWithOneOpponent(to))
-				&& (playerMovesCheckerInLegalDirection(from, to) )
+				&& (playerMovesCheckerInLegalDirection(from, to))
 				&& ((distanceTravelledEqualsTheValueOfDieRolled(from, to)) || (attemptsToBearOff(to)
 						&& currentPlayerHasAllCheckersOnInnerTable() && noCheckerOnInnerTableFartherAwayThanDieValue(from)))
 				&& (!attemptsToMoveToTheBar(to))
-				&& (!currentPlayerIsInTheBar() || (movesToOpponentsInnerTableFromBar(from, to)))
-				&& ((!attemptsToBearOff(to)) || (currentPlayerHasAllCheckersOnInnerTable()))
+				&& (!currentPlayerIsInTheBar() || (movesToOpponentsInnerTableFromBar(
+						from, to)))
+				&& ((!attemptsToBearOff(to)) || (currentPlayerHasAllCheckersOnInnerTable()));
 
-		;
+		if (!valid) {
+			if (noMovePossible(from)) {
+				game.setSkipTurn(true);
+			}
+		}
+
+		return valid;
 	}
 
 	public boolean checkerIsMovedToLocationWithOneOpponent(Location to) {
@@ -131,13 +129,15 @@ public class CompleteMoveValidator implements MoveValidator {
 	private boolean blackMovesToOpponentsInnerTable(Location from, Location to) {
 
 		return game.getPlayerInTurn() == Color.BLACK
-				&& BoardImpl.redInnerTable.contains(to) && from == Location.B_BAR;
+				&& BoardImpl.redInnerTable.contains(to)
+				&& from == Location.B_BAR;
 	}
 
 	private boolean redMovesToOpponetsInnerTable(Location from, Location to) {
 
 		return game.getPlayerInTurn() == Color.RED
-				&& BoardImpl.blackInnerTable.contains(to) && from == Location.R_BAR;
+				&& BoardImpl.blackInnerTable.contains(to)
+				&& from == Location.R_BAR;
 	}
 
 	private boolean movesToOpponentsInnerTableFromBar(Location from, Location to) {
@@ -158,9 +158,7 @@ public class CompleteMoveValidator implements MoveValidator {
 
 	}
 
-
-	private boolean noRedCheckerOnInnerTableFartherAwayFromDieValue(
-			) {
+	private boolean noRedCheckerOnInnerTableFartherAwayFromDieValue() {
 
 		Board board = game.getBoard();
 		ArrayList<Location> innerTable = BoardImpl.redInnerTable;
@@ -180,8 +178,7 @@ public class CompleteMoveValidator implements MoveValidator {
 		return true;
 	}
 
-	private boolean noBlackCheckerOnInnerTableFartherAwayFromDieValue(
-			) {
+	private boolean noBlackCheckerOnInnerTableFartherAwayFromDieValue() {
 
 		Board board = game.getBoard();
 		ArrayList<Location> innerTable = BoardImpl.blackInnerTable;
@@ -239,15 +236,52 @@ public class CompleteMoveValidator implements MoveValidator {
 		return to == Location.R_BEAR_OFF || to == Location.B_BEAR_OFF;
 	}
 
-
-	
-	
 	@Override
 	public int getNumberOfMovesLeft() {
-		
-		return movesDoubled()? DOUBLE * GameImpl.STANDARD_NUM_OF_MOVES  - game.getNumberOfMovesMade() : GameImpl.STANDARD_NUM_OF_MOVES  - game.getNumberOfMovesMade();
-
+		return movesDoubled() ? DOUBLE * GameImpl.STANDARD_NUM_OF_MOVES
+				- game.getNumberOfMovesMade() : GameImpl.STANDARD_NUM_OF_MOVES
+				- game.getNumberOfMovesMade();
 	}
-	
 
+	private ArrayList<Integer> getLocationNumbers(Location from) {
+
+		ArrayList<Integer> locationNumbers = new ArrayList<Integer>();
+		for (int i = 0; i < game.diceValuesLeft.length; i++) {
+			locationNumbers.add(from.ordinal() + game.diceValuesLeft[i]);
+			locationNumbers.add(from.ordinal() - game.diceValuesLeft[i]);
+		}
+		return locationNumbers;
+	}
+
+	public boolean noMovePossible(Location from) {
+
+		ArrayList<Location> potentialLocations = getPotentialLocations(from,
+				getLocationNumbers(from));
+
+		for (int i = 0; i < potentialLocations.size(); i++) {
+			if (isValid(from, potentialLocations.get(i))) {
+				return false;
+			}
+		}
+		
+		System.out.println("NO MOVES ARE POSSIBLE");
+		return true;
+	}
+
+	public ArrayList<Location> getPotentialLocations(Location location,
+			ArrayList<Integer> locationNumbers) {
+
+		ArrayList<Location> potentialLocations = new ArrayList();
+
+		for (int i = 0; i < locationNumbers.size(); i++) {
+			try {
+				Location potentialLocation = Location.valueOf("R"
+						+ locationNumbers.get(i));
+				potentialLocations.add(potentialLocation);
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("EXCEPTION WAS THROWN!!!!!!!!!!!!!!!!!!!!!");
+			}
+		}
+		return potentialLocations;
+	}
 }
