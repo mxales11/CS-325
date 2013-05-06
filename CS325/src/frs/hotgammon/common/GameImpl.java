@@ -272,11 +272,29 @@ public class GameImpl implements Game {
 	}
 
 	public Color getColor(Location location) {
-		return ((BoardImpl) board).get(location.ordinal()).color;
+		
+		Color color = null;
+		try{
+			color =  ((BoardImpl) board).get(location.ordinal()).color;
+		}
+		catch (NullPointerException e) {
+			System.out.println("Null pointer exception was caught");
+		}
+		
+		return color;
+		
 	}
 
 	public int getCount(Location location) {
-		return ((BoardImpl) board).get(location.ordinal()).occupants;
+		
+		int numOfOccupants = 0;
+		try{
+		numOfOccupants = ((BoardImpl) board).get(location.ordinal()).occupants;
+		}
+		catch (NullPointerException e) {
+			System.out.println("GameImpl you cannot getCount() on null location");
+		}
+		return numOfOccupants;
 	}
 
 	@Override
