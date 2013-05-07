@@ -117,7 +117,7 @@ public class CompleteMoveValidator implements MoveValidator {
 	}
 
 	private boolean blackCheckerIsInTheBar() {
-		
+
 		game.changeStatusField("Move checker from the bar first");
 		return game.getBoard().get(Location.B_BAR.ordinal()).occupants != 0
 				&& game.getPlayerInTurn() == Color.BLACK;
@@ -129,7 +129,7 @@ public class CompleteMoveValidator implements MoveValidator {
 				&& game.getPlayerInTurn() == Color.RED;
 	}
 
-	private boolean currentPlayerIsInTheBar() {
+	public boolean currentPlayerIsInTheBar() {
 		return blackCheckerIsInTheBar() || redCheckerIsInTheBar();
 	}
 
@@ -264,7 +264,7 @@ public class CompleteMoveValidator implements MoveValidator {
 
 	}
 
-	private boolean noMovePossible() {
+	public boolean noMovePossible() {
 
 		ArrayList<Location> potentialToLocations;
 		ArrayList<Location> potentialFromLocations = getPotentialFromLocations();
@@ -285,6 +285,7 @@ public class CompleteMoveValidator implements MoveValidator {
 
 		isPotentialMove = false;
 		System.out.println("N0 MOVE POSSIBLE!!");
+
 		return true;
 	}
 

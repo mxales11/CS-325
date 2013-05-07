@@ -85,14 +85,7 @@ public class HotgammonTool extends SelectionTool {
 
 		boolean toReturn = tool.toString().toLowerCase()
 				.indexOf(f.toString().toLowerCase()) != -1 ? true : false;
-		/**
-		String toolAction = (game.getGameState().toString()
-				.equals("DieRollState")) ? "You cannot roll die now. "
-				+ game.getPlayerInTurn() + "has " + game.getNumberOfMovesLeft()
-				: "There are no moves left. Please roll the dice.";
-
-		game.changeStatusField(toolAction);
-		**/
+		
 		return toReturn && tool != null;
 
 	}

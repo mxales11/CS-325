@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 import frs.hotgammon.common.GameImpl;
+import frs.hotgammon.framework.Color;
 import frs.hotgammon.framework.Game;
 import frs.hotgammon.framework.Location;
 import minidraw.customized.helpers.Coordinates;
@@ -28,31 +29,38 @@ public class CheckerMoveTool extends AbstractTool {
 
 	}
 
+	public void displayIllegalMoveExplanationInStatusField(Location to) {
+		
+		String rollDie = game.getNumberOfMovesLeft() == 0 ? " Roll dice"
+				: "";
+		
+		if (game.getMoveValidator().noMovePossible()) {
+			game.changeStatusField("No moves are possible. Your turn is skipped. Please roll dice.");
+		}
+
+		else if (game.winner() != Color.NONE) {
+			game.changeStatusField("The winner is "
+					+ game.getPlayerInTurn());
+		} else {
+			game.changeStatusField("The move from "
+					+ lastFromLocation + " to " + to
+					+ " is illegal. It is "
+					+ game.getPlayerInTurn() + "'s turn. "
+					+ game.printDiceValuesLeft() + rollDie);
+		}
+
+	}
+
 	public void mouseUp(MouseEvent e, int x, int y) {
 
 		Location to = Convert.xy2Location(x, y);
 		pointTo = new Point(x, y);
 
 		for (Figure f : editor().drawing().selection()) {
-
 			if (playerMovesHisChecker(f)) {
 				if (!(game.move(lastFromLocation, to))) {
-
-					String rollDie = game.getNumberOfMovesLeft() == 0 ? " Roll dice"
-							: "";
-					System.out.println("Skip turn is " + game.getSkipTurn());
-					if (game.getSkipTurn()) {
-	
-						game.changeStatusField("No moves are possible. Your turn is skipped. Please roll dice.");
-					} else {
-						game.changeStatusField("The move from "
-								+ lastFromLocation + " to " + to
-								+ " is illegal. It is "
-								+ game.getPlayerInTurn() + "'s turn. "
-								+ game.printDiceValuesLeft() + rollDie);
-
-						moveBackToOriginalPosition();
-					}
+					displayIllegalMoveExplanationInStatusField(to);
+					moveBackToOriginalPosition();
 				}
 			}
 

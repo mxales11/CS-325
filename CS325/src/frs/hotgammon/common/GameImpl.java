@@ -376,4 +376,8 @@ public class GameImpl implements Game {
 		return dieInCorrectForm + "left: " + diceLeft;
 	}
 
+	public MoveValidator getMoveValidator() {
+		return moveValidator;
+	}
+
 }

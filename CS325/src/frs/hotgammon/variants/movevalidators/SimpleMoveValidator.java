@@ -68,4 +68,9 @@ public class SimpleMoveValidator implements MoveValidator {
 		return GameImpl.STANDARD_NUM_OF_MOVES  - game.getNumberOfMovesMade();
 	}
 
+	@Override
+	public boolean noMovePossible() {
+		return false;
+	}
+
 }
