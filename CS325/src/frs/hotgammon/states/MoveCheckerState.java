@@ -80,18 +80,14 @@ public class MoveCheckerState implements GameState {
 	public void nextTurn() {
 		
 		for (int i = 0; i < game.getGameObserversList().size(); i++) {
-			game.getGameObserversList()
-					.get(i)
-					.changeStatusField(
+			game.changeStatusField(
 							"You cannot throw dice now. "
 									+ game.getPlayerInTurn() + " has "
 									+ game.getNumberOfMovesLeft());
 		}
-
 	}
 
 	public String toString() {
-
 		return "MoveCheckerState";
 	}
 

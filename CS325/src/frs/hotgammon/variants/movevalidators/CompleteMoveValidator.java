@@ -98,8 +98,6 @@ public class CompleteMoveValidator implements MoveValidator {
 		if (!valid && !isPotentialMove) {
 			if (noMovePossible()) {
 				game.setState(new DiceRollState(game));
-				System.out.println("Your turn was skipped");
-				game.changeStatusField("No moves legal. Your turn was skipped. Roll dice.");
 			}
 		}
 

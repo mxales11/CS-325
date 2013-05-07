@@ -30,23 +30,19 @@ public class CheckerMoveTool extends AbstractTool {
 	}
 
 	public void displayIllegalMoveExplanationInStatusField(Location to) {
-		
-		String rollDie = game.getNumberOfMovesLeft() == 0 ? " Roll dice"
-				: "";
-		
-		if (game.getMoveValidator().noMovePossible()) {
+
+		String rollDie = game.getNumberOfMovesLeft() == 0 ? " Roll dice" : "";
+
+		if (game.winner() != Color.NONE) {
+			game.changeStatusField("The winner is " + game.getPlayerInTurn());
+		} else if (game.getMoveValidator().noMovePossible()) {
 			game.changeStatusField("No moves are possible. Your turn is skipped. Please roll dice.");
 		}
 
-		else if (game.winner() != Color.NONE) {
-			game.changeStatusField("The winner is "
-					+ game.getPlayerInTurn());
-		} else {
-			game.changeStatusField("The move from "
-					+ lastFromLocation + " to " + to
-					+ " is illegal. It is "
-					+ game.getPlayerInTurn() + "'s turn. "
-					+ game.printDiceValuesLeft() + rollDie);
+		else {
+			game.changeStatusField("The move from " + lastFromLocation + " to "
+					+ to + " is illegal. It is " + game.getPlayerInTurn()
+					+ "'s turn. " + game.printDiceValuesLeft() + rollDie);
 		}
 
 	}

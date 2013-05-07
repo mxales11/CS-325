@@ -72,6 +72,7 @@ public class GameImpl implements Game {
 	public void setMoveValidator(MoveValidator moveValidator) {
 		this.moveValidator = moveValidator;
 	}
+	
 
 	public void setUpBoard(BoardImpl board) {
 		board.get(Location.R1.ordinal()).occupants = 2;
@@ -250,12 +251,12 @@ public class GameImpl implements Game {
 
 		if (rulesFactory.createWinnerDeterminer().isWinner(turnNumber)) {
 			if (turnNumber == MINIMAL_NUM_OF_MOVES_TO_WIN_GAME) {
-
 				return Color.RED;
 			} else {
 				return this.getPlayerInTurn();
 			}
 		}
+		
 		return Color.NONE;
 	}
 

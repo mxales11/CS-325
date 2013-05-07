@@ -114,7 +114,13 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 		for (Figure f : editor.drawing().selection()) {
 			foundFigure = (CheckerFigure) f;
 
-			if (foundFigure != null) {
+			if (game.winner() != Color.NONE) {
+				game.changeStatusField("The winner is "
+						+ game.getPlayerInTurn());
+
+			}
+
+			else if (foundFigure != null) {
 				String movesInCorrectForm = (game.getNumberOfMovesLeft() == 1) ? "move"
 						: "moves";
 				game.changeStatusField(game.getPlayerInTurn() + " has "
@@ -202,6 +208,7 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 		statusEditor.setText(info);
 	}
 
+	
 	private void initializeCheckers() {
 
 		this.add(new CheckerFigure(Color.BLACK, Convert.locationAndCount2xy(
@@ -266,5 +273,4 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 		this.add(new CheckerFigure(Color.RED, Convert.locationAndCount2xy(
 				Location.B12, 4)));
 	}
-
 }
