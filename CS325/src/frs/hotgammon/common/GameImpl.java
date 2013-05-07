@@ -37,7 +37,6 @@ public class GameImpl implements Game {
 	private RollDeterminer rollDeterminer;
 	private WinnerDeterminer winnerDeterminer;
 	private RulesFactory rulesFactory;
-	
 
 	private GameState currentState;
 	private ArrayList<GameObserver> gameObserversList = new ArrayList<GameObserver>();
@@ -111,9 +110,8 @@ public class GameImpl implements Game {
 		board = new BoardImpl(25);
 		resetGame();
 		this.rulesFactory.setGame(this);
-		System.out.println("New game was started");
 		currentState = new GameStateImpl(this);
-	
+
 	}
 
 	public void changePlayer() {
@@ -123,15 +121,9 @@ public class GameImpl implements Game {
 
 		} else if (getPlayerInTurn() == Color.RED) {
 			playerInTurn = Color.BLACK;
-		}
-		else {
+		} else {
 			playerInTurn = Color.NONE;
 		}
-		for (int i = 0; i < getGameObserversList().size(); i++) {
-			gameObserversList.get(i).changeStatusField("Player in turn is "+ getPlayerInTurn());
-		}
-
-		
 	}
 
 	public void nextTurn() {
@@ -143,21 +135,17 @@ public class GameImpl implements Game {
 		if ((diceThrown()[0]) != (diceThrown()[1])) {
 			return diceThrown()[0] > diceThrown()[1] ? Color.RED : Color.BLACK;
 		}
-
-		System.out.println("Starting player is null");
 		return Color.NONE;
 
 	}
 
 	public void sendToTheBar(Location from, Location to) {
 
-		System.out
-				.println("Was sent to the bar!!!!!!!!!!!!!! Invoke checkerMove to redraw");
 		Color player = this.getColor(to);
 		Location bar = player == Color.RED ? Location.R_BAR : Location.B_BAR;
 		this.getBoard().move(to, bar);
-
 		
+
 	}
 
 	public boolean move(Location from, Location to) {
@@ -272,27 +260,23 @@ public class GameImpl implements Game {
 	}
 
 	public Color getColor(Location location) {
-		
+
 		Color color = null;
-		try{
-			color =  ((BoardImpl) board).get(location.ordinal()).color;
+		try {
+			color = ((BoardImpl) board).get(location.ordinal()).color;
+		} catch (NullPointerException e) {
 		}
-		catch (NullPointerException e) {
-			System.out.println("Null pointer exception was caught");
-		}
-		
+
 		return color;
-		
+
 	}
 
 	public int getCount(Location location) {
-		
+
 		int numOfOccupants = 0;
-		try{
-		numOfOccupants = ((BoardImpl) board).get(location.ordinal()).occupants;
-		}
-		catch (NullPointerException e) {
-			System.out.println("GameImpl you cannot getCount() on null location");
+		try {
+			numOfOccupants = ((BoardImpl) board).get(location.ordinal()).occupants;
+		} catch (NullPointerException e) {
 		}
 		return numOfOccupants;
 	}
@@ -361,14 +345,35 @@ public class GameImpl implements Game {
 	public ArrayList<GameObserver> getGameObserversList() {
 		return gameObserversList;
 	}
-	
-	public boolean getSkipTurn(){
+
+	public boolean getSkipTurn() {
 		return skipTurn;
 	}
 
 	public void setSkipTurn(boolean skipTurn) {
 		this.skipTurn = skipTurn;
 	}
-	
+
+	public void changeStatusField(String textFieldInfo) {
+		for (int i = 0; i < gameObserversList.size(); i++) {
+			getGameObserversList().get(i).changeStatusField(textFieldInfo);
+		}
+	}
+
+	public String printDiceValuesLeft() {
+
+		StringBuffer diceLeft = new StringBuffer("[");
+		String dieInCorrectForm = (diceValuesLeft.length == 1) ? " Die value "
+				: "" + "Dice values ";
+
+		for (int i = 0; i < diceValuesLeft.length; i++) {
+			diceLeft.append(diceValuesLeft[i]);
+			if (i != diceValuesLeft.length - 1) {
+				diceLeft.append(", ");
+			}
+		}
+		diceLeft.append("]");
+		return dieInCorrectForm + "left: " + diceLeft;
+	}
 
 }

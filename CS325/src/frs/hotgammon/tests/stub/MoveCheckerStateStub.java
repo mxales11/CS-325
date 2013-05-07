@@ -30,14 +30,11 @@ public class MoveCheckerStateStub implements GameState {
 		}
 
 		else if (to == null) {
-
-			System.out.println("You cannot move to empty location");
 			return false;
 		}
 
 		else if (Location.distance(from, to) == 0) {
 
-			System.out.println("You cannot move to itself");
 			return false;
 		} else {
 			System.out

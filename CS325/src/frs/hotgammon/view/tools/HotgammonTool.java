@@ -42,8 +42,6 @@ public class HotgammonTool extends SelectionTool {
 	public void mouseUp(MouseEvent e, int x, int y) {
 
 		for (Figure f : editor().drawing().selection()) {
-			
-			System.out.println("Current state is "+ game.getGameState());
 
 			if (toolMovesItsFigure(f, currentTool) && currentTool != null
 					&& !(currentTool instanceof NullTool)) {
@@ -62,23 +60,14 @@ public class HotgammonTool extends SelectionTool {
 		for (Figure f : editor().drawing().selection()) {
 
 			if (toolMovesItsFigure(f, currentTool)) {
-				System.out.println("CURRENT TOOL IS" + currentTool);
 				currentTool.mouseDown(e, x, y);
 			}
 
 		}
 		if (currentTool instanceof NullTool) {
-			printWarning();
+			game.changeStatusField("Game has already finished!");
 		}
 
-	}
-
-	private void printWarning() {
-
-		for (int i = 0; i < game.getGameObserversList().size(); i++) {
-			game.getGameObserversList().get(i)
-					.changeStatusField("Game has already finished!");
-		}
 	}
 
 	private Tool getCurrentTool() {
@@ -96,6 +85,14 @@ public class HotgammonTool extends SelectionTool {
 
 		boolean toReturn = tool.toString().toLowerCase()
 				.indexOf(f.toString().toLowerCase()) != -1 ? true : false;
+		/**
+		String toolAction = (game.getGameState().toString()
+				.equals("DieRollState")) ? "You cannot roll die now. "
+				+ game.getPlayerInTurn() + "has " + game.getNumberOfMovesLeft()
+				: "There are no moves left. Please roll the dice.";
+
+		game.changeStatusField(toolAction);
+		**/
 		return toReturn && tool != null;
 
 	}

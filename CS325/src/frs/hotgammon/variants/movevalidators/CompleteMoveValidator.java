@@ -99,9 +99,7 @@ public class CompleteMoveValidator implements MoveValidator {
 			if (noMovePossible()) {
 				game.setState(new DiceRollState(game));
 				System.out.println("Your turn was skipped");
-				for (int i = 0; i < game.getGameObserversList().size(); i++) {
-					game.getGameObserversList().get(i).changeStatusField("No moves legal! Your turn was skipped. Player in turn is " + game.getPlayerInTurn());
-				}
+				game.changeStatusField("No moves legal. Your turn was skipped. Roll dice.");
 			}
 		}
 
@@ -119,11 +117,14 @@ public class CompleteMoveValidator implements MoveValidator {
 	}
 
 	private boolean blackCheckerIsInTheBar() {
+		
+		game.changeStatusField("Move checker from the bar first");
 		return game.getBoard().get(Location.B_BAR.ordinal()).occupants != 0
 				&& game.getPlayerInTurn() == Color.BLACK;
 	}
 
 	private boolean redCheckerIsInTheBar() {
+		game.changeStatusField("Move checker from the bar first");
 		return game.getBoard().get(Location.R_BAR.ordinal()).occupants != 0
 				&& game.getPlayerInTurn() == Color.RED;
 	}
@@ -217,12 +218,10 @@ public class CompleteMoveValidator implements MoveValidator {
 		Board board = game.getBoard();
 
 		for (int i = 0; i < board.size(); i++) {
-
 			Square container = board.get(i);
 			if (container.color == player
 					&& (indexesOfInnerTable(innerTable).indexOf(i) == -1 && i != bearOff
 							.ordinal())) {
-
 				return false;
 			}
 		}
@@ -244,9 +243,11 @@ public class CompleteMoveValidator implements MoveValidator {
 
 	@Override
 	public int getNumberOfMovesLeft() {
-		return movesDoubled() ? DOUBLE * GameImpl.STANDARD_NUM_OF_MOVES
-				- game.getNumberOfMovesMade() : GameImpl.STANDARD_NUM_OF_MOVES
-				- game.getNumberOfMovesMade();
+		int movesLeft = movesDoubled() ? DOUBLE
+				* GameImpl.STANDARD_NUM_OF_MOVES - game.getNumberOfMovesMade()
+				: GameImpl.STANDARD_NUM_OF_MOVES - game.getNumberOfMovesMade();
+
+		return movesLeft == -2 ? 0 : movesLeft;
 	}
 
 	public ArrayList<Location> getPotentialFromLocations() {
@@ -283,7 +284,6 @@ public class CompleteMoveValidator implements MoveValidator {
 		}
 
 		isPotentialMove = false;
-		printPotentialLocations(potentialFromLocations);
 		System.out.println("N0 MOVE POSSIBLE!!");
 		return true;
 	}
@@ -295,16 +295,7 @@ public class CompleteMoveValidator implements MoveValidator {
 		for (Location loc : Location.values()) {
 			potentialToLocations.add(loc);
 		}
-
 		return potentialToLocations;
-
-	}
-
-	private void printPotentialLocations(ArrayList<Location> potentialLocations) {
-		System.out.println("Potential locations are: ");
-		for (int i = 0; i < potentialLocations.size(); i++) {
-			System.out.println(potentialLocations.get(i));
-		}
 	}
 
 }

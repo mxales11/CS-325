@@ -81,8 +81,6 @@ class HotGammonFactory implements Factory {
 	}
 	
 	public Drawing createDrawing(DrawingEditor editor) {
-
-		System.out.println("Status field is " + statusField );
 		return new HotgammonDrawing(editor, game, statusField);
 
 	}

@@ -19,7 +19,6 @@ public class DiceRollStateStub implements GameState {
 
 	@Override
 	public boolean move(Location from, Location to) {
-		System.out.println("You cannot move now. You have 0 moves left");
 		return false;
 	}
 

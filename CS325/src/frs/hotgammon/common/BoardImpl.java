@@ -73,7 +73,6 @@ public class BoardImpl extends ArrayList<Square> implements Board {
 		this.get(index).occupants++;
 		this.get(index).color = player;
 
-		// this is just to conform to API
 		return true;
 	}
 

@@ -46,11 +46,6 @@ public class MoveCheckerState implements GameState {
 
 			if (noMovesLeft() || game.getSkipTurn()) {
 
-				for (int i = 0; i < game.getGameObserversList().size(); i++) {
-					game.getGameObserversList().get(i)
-							.changeStatusField("Roll dice to move!");
-				}
-
 				game.setState(new DiceRollState(game));
 				game.setSkipTurn(false);
 			}
@@ -64,9 +59,6 @@ public class MoveCheckerState implements GameState {
 				game.diceValuesLeft = new int[2];
 				game.diceValuesLeft[0] = game.diceThrown()[0];
 				game.diceValuesLeft[1] = game.diceThrown()[1];
-
-				
-
 			}
 
 			for (int i = 0; i < game.getGameObserversList().size(); i++) {

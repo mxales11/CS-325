@@ -38,40 +38,44 @@ public class CheckerMoveTool extends AbstractTool {
 			if (playerMovesHisChecker(f)) {
 				if (!(game.move(lastFromLocation, to))) {
 
-					for (int i = 0; i < game.getGameObserversList().size(); i++) {
-						game.getGameObserversList().get(i).changeStatusField("The move from " + lastFromLocation
-								+ " to " + to + " is illegal");
+					String rollDie = game.getNumberOfMovesLeft() == 0 ? " Roll dice"
+							: "";
+					System.out.println("Skip turn is " + game.getSkipTurn());
+					if (game.getSkipTurn()) {
+	
+						game.changeStatusField("No moves are possible. Your turn is skipped. Please roll dice.");
+					} else {
+						game.changeStatusField("The move from "
+								+ lastFromLocation + " to " + to
+								+ " is illegal. It is "
+								+ game.getPlayerInTurn() + "'s turn. "
+								+ game.printDiceValuesLeft() + rollDie);
+
+						moveBackToOriginalPosition();
 					}
-
-					moveBackToOriginalPosition();
 				}
 			}
-			
+
 			else {
-				
-				for (int i = 0; i < game.getGameObserversList().size(); i++) {
-					game.getGameObserversList().get(i).changeStatusField("It is " + game.getPlayerInTurn() + " turn. You cannot move");
-				}
+				game.changeStatusField("You cannot move. It is "
+						+ game.getPlayerInTurn() + "'s" + " turn. "
+						+ game.printDiceValuesLeft());
 			}
-
 		}
 
 		super.mouseUp(e, x, y);
 	}
 
 	public void mouseDown(MouseEvent e, int x, int y) {
-		
+
 		super.mouseDown(e, x, y);
 		Location from = Convert.xy2Location(x, y);
 		lastFromLocation = from;
 		pointFrom = new Point(x, y);
 	}
 
-	
-	
 	private void moveBackToOriginalPosition() {
 
-		
 		for (Figure f : editor().drawing().selection()) {
 			int xToMove = (int) (pointFrom.getX() - pointTo.getX());
 			int yToMove = (int) (pointFrom.getY() - pointTo.getY());
