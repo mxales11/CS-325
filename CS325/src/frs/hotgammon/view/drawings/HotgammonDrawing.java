@@ -226,6 +226,5 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 						Convert.locationAndCount2xy((getLocation(i)), k)));
 			}
 		}
-
 	}
 }
