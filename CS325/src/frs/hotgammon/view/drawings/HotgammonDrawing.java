@@ -200,7 +200,6 @@ public class HotgammonDrawing extends StandardDrawing implements GameObserver {
 			game.changeStatusField("It is " + game.getPlayerInTurn() + "'s"
 					+ " turn");
 		}
-
 	}
 
 	@Override

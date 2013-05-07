@@ -72,7 +72,6 @@ class HotGammonFactory implements Factory {
 		DrawingView view = new StdViewWithBackground(editor, "board");
 		return view;
 	}
-
 	
 	public JTextField createStatusField(DrawingEditor editor) {
 	
